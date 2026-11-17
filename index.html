@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071d2b">
+  <meta name="description" content="Discus pilihan dengan kualitas premium dari Blessed Discus Indonesia.">
+  <title>Blessed Discus Indonesia — Keindahan yang Hidup</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #092333;
+      --deep: #071d2b;
+      --ocean: #0e3445;
+      --muted: #71818a;
+      --gold: #d7a64b;
+      --sand: #f7f5ef;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "DM Sans", sans-serif; color: var(--ink); }
+    h1, h2, h3, .serif { font-family: "Playfair Display", Georgia, serif; }
+    .hero-pattern {
+      background-image: radial-gradient(ellipse at 75% 40%, rgba(32, 94, 106, .36), transparent 40%),
+        radial-gradient(ellipse at 10% 110%, rgba(215, 166, 75, .12), transparent 40%);
+    }
+    .fish-card { transition: transform .28s ease, box-shadow .28s ease; }
+    .fish-card:hover { transform: translateY(-5px); box-shadow: 0 24px 55px rgba(9, 35, 51, .12); }
+    .fish-image { transition: transform .65s cubic-bezier(.2,.7,.2,1); }
+    .fish-card:hover .fish-image { transform: scale(1.055); }
+    .modal-backdrop { background: rgba(3, 17, 26, .68); backdrop-filter: blur(7px); }
+    .admin-scroll::-webkit-scrollbar { width: 7px; }
+    .admin-scroll::-webkit-scrollbar-thumb { background: #d5dfe2; border-radius: 10px; }
+    .focus-ring:focus { outline: 3px solid rgba(215, 166, 75, .45); outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body class="bg-[#fbfaf7]">
+  <header class="absolute inset-x-0 top-0 z-30 text-white">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 sm:px-5 sm:py-5 lg:px-8" aria-label="Navigasi utama">
+      <a href="#beranda" class="flex items-center gap-3" aria-label="Blessed Discus Indonesia, beranda">
+        <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-amber-300/50 bg-white/5 text-amber-300 sm:h-10 sm:w-10">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 12s3.2-6 9-6 9 6 9 6-3.2 6-9 6-9-6-9-6Z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/><path d="m3 12-2-3v6l2-3Z" fill="currentColor"/></svg>
+        </span>
+        <span><span class="block text-[11px] font-bold tracking-[.14em] sm:text-sm sm:tracking-[.17em]">
+          BLESSED DISCUS INDONESIA</span><span class="block text-[8px] tracking-[.25em] text-white/55 sm:text-[9px] sm:tracking-[.32em]">SPECIALTY FARM</span></span>
+      </a>
+      <div class="hidden items-center gap-8 text-sm text-white/75 md:flex">
+        <a class="transition hover:text-amber-300" href="#beranda">Beranda</a>
+        <a class="transition hover:text-amber-300" href="#koleksi">Katalog Ikan</a>
+        <a class="transition hover:text-amber-300" href="#keunggulan">Keunggulan</a>
+        <a class="transition hover:text-amber-300" href="#kontak">Kontak</a>
+      </div>
+      <button id="admin-entry" class="focus-ring flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-xs font-semibold tracking-wide transition hover:border-amber-300/70 hover:text-amber-200" type="button" aria-label="Masuk ke mode admin">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM5 20a7 7 0 0 1 14 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span>Admin</span>
+      </button>
+      <button id="mobile-menu-toggle" class="focus-ring grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/20 text-white transition hover:border-amber-300/70 hover:text-amber-200 md:hidden" type="button" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="mobile-nav">
+        <svg id="mobile-menu-icon" width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </button>
+    </nav>
+    <div id="mobile-nav" class="mx-4 hidden rounded-2xl border border-white/10 bg-[#0b2936]/95 p-2 shadow-xl backdrop-blur md:hidden">
+      <a class="mobile-nav-link block rounded-xl px-4 py-3 text-sm text-white/80 transition hover:bg-white/10 hover:text-amber-200" href="#beranda">Beranda</a>
+      <a class="mobile-nav-link block rounded-xl px-4 py-3 text-sm text-white/80 transition hover:bg-white/10 hover:text-amber-200" href="#koleksi">Katalog Ikan</a>
+      <a class="mobile-nav-link block rounded-xl px-4 py-3 text-sm text-white/80 transition hover:bg-white/10 hover:text-amber-200" href="#keunggulan">Keunggulan</a>
+      <a class="mobile-nav-link block rounded-xl px-4 py-3 text-sm text-white/80 transition hover:bg-white/10 hover:text-amber-200" href="#kontak">Kontak</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="beranda" class="hero-pattern relative min-h-[690px] overflow-hidden bg-[#071d2b] text-white lg:min-h-[760px]">
+      <div class="absolute inset-0 opacity-30" aria-hidden="true">
+        <img class="h-full w-full object-cover object-center" src="https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=2000&q=85" alt="">
+      </div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[#071d2b] via-[#071d2b]/95 to-[#071d2b]/65" aria-hidden="true"></div>
+      <div class="relative mx-auto grid min-h-[690px] max-w-7xl items-center gap-10 px-5 pb-12 pt-28 sm:pb-16 sm:pt-32 lg:min-h-[760px] lg:grid-cols-[1.05fr_.95fr] lg:px-8">
+        <div class="max-w-2xl">
+          <p class="mb-6 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[.28em] text-amber-300"><span class="h-px w-9 bg-amber-300"></span>Keindahan dari kedalaman</p>
+          <h1 class="max-w-xl text-[2.75rem] leading-[1.08] sm:text-6xl lg:text-[4.5rem]">Pesona Discus,<br><span class="italic text-amber-300">dirawat sepenuh hati.</span></h1>
+          <p class="mt-7 max-w-lg text-base leading-7 text-white/65 sm:text-lg">Temukan ikan Discus pilihan dengan warna memikat, kondisi prima, dan perawatan terbaik langsung dari farm kami.</p>
+          <div class="mt-9 flex flex-wrap items-center gap-4">
+            <a href="#koleksi" class="focus-ring rounded-full bg-amber-400 px-7 py-3.5 text-sm font-bold text-[#132c36] shadow-lg shadow-amber-950/20 transition hover:bg-amber-300">Lihat Koleksi Discus <span class="ml-2" aria-hidden="true">→</span></a>
+            <a href="#keunggulan" class="rounded-full px-5 py-3 text-sm font-medium text-white/75 transition hover:text-white">Kenali farm kami</a>
+          </div>
+          <div class="mt-10 flex justify-between gap-3 border-t border-white/15 pt-6 sm:mt-14 sm:justify-start sm:gap-10">
+            <div><p class="serif text-2xl text-amber-300">10+</p><p class="mt-1 text-[10px] uppercase tracking-[.18em] text-white/50">Varietas pilihan</p></div>
+            <div><p class="serif text-2xl text-amber-300">Sehat</p><p class="mt-1 text-[10px] uppercase tracking-[.18em] text-white/50">Dirawat dengan teliti</p></div>
+            <div><p class="serif text-2xl text-amber-300">Sejak 2014</p><p class="mt-1 text-[10px] uppercase tracking-[.18em] text-white/50">Pengalaman kami</p></div>
+          </div>
+        </div>
+        <div class="relative hidden h-[470px] lg:block">
+          <div class="absolute right-8 top-10 h-[390px] w-[370px] overflow-hidden rounded-[190px_190px_24px_24px] border border-white/15 bg-[#123b49] shadow-2xl">
+            <img class="h-full w-full object-cover" src="https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85" alt="Ikan hias tropis di dalam akuarium" onerror="this.style.display='none'">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#071d2b]/65 via-transparent to-transparent"></div>
+          </div>
+          <div class="absolute bottom-4 left-2 rounded-2xl border border-white/15 bg-[#0b2936]/90 p-4 shadow-xl backdrop-blur">
+            <p class="text-[9px] uppercase tracking-[.2em] text-amber-300">Pilihan kurator</p><p class="serif mt-1 text-lg">Warna yang memikat</p>
+          </div>
+          <span class="absolute right-0 top-3 h-24 w-24 rounded-full border border-amber-300/20"></span>
+          <span class="absolute right-[-12px] top-[-9px] h-24 w-24 rounded-full border border-amber-300/20"></span>
+        </div>
+      </div>
+      <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-300/50 to-transparent"></div>
+    </section>
+
+    <section id="koleksi" class="mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-28">
+      <div class="flex flex-col justify-between gap-8 md:flex-row md:items-end">
+        <div class="max-w-xl">
+          <p class="mb-3 text-[10px] font-bold uppercase tracking-[.25em] text-[#b78735]">FOR PREMIUM COLLECTION</p>
+          <h2 class="text-4xl leading-tight sm:text-5xl">Temukan Discus<br>favorit Anda.</h2>
+          <p class="mt-4 text-sm leading-6 text-slate-500">Setiap ikan dipilih dengan cermat untuk menghadirkan warna dan karakter terbaik di akuarium Anda.</p>
+        </div>
+        <div class="flex w-full flex-col gap-3 sm:flex-row md:w-auto">
+          <label class="relative block sm:w-64">
+            <span class="sr-only">Cari nama ikan</span>
+            <svg class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            <input id="search-input" class="focus-ring h-12 w-full rounded-full border border-slate-200 bg-white pl-11 pr-4 text-sm outline-none transition focus:border-[#d7a64b]" type="search" placeholder="Cari jenis ikan...">
+          </label>
+          <label>
+            <span class="sr-only">Filter ukuran atau grade</span>
+            <select id="category-filter" class="focus-ring h-12 w-full rounded-full border border-slate-200 bg-white px-5 text-sm text-slate-600 outline-none transition focus:border-[#d7a64b] sm:w-48">
+              <option value="all">Semua ukuran / grade</option>
+              <option value="S">Ukuran kecil</option>
+              <option value="M">Ukuran medium</option>
+              <option value="L">Ukuran besar</option>
+              <option value="A">Grade A</option>
+              <option value="Premium">Premium</option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <div id="catalog-count" class="mt-10 border-b border-slate-200 pb-4 text-xs text-slate-400"></div>
+      <div id="catalog-grid" class="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" aria-live="polite"></div>
+      <div id="empty-results" class="hidden py-20 text-center">
+        <p class="serif text-2xl">Koleksi belum ditemukan</p>
+        <p class="mt-2 text-sm text-slate-500">Coba kata kunci atau filter ukuran lainnya.</p>
+      </div>
+    </section>
+
+    <section id="keunggulan" class="bg-[#f1f0ea] py-20 lg:py-24">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="mx-auto mb-12 max-w-xl text-center">
+          <p class="mb-3 text-[10px] font-bold uppercase tracking-[.25em] text-[#b78735]">Mengapa Blessed Discus Indonesia</p>
+          <h2 class="text-4xl">Lebih dari sekadar ikan.</h2>
+          <p class="mt-4 text-sm leading-6 text-slate-500">Kami percaya Discus yang indah dimulai dari perawatan yang penuh perhatian.</p>
+        </div>
+        <div class="grid gap-5 md:grid-cols-3">
+          <article class="rounded-2xl bg-white p-7">
+            <span class="grid h-12 w-12 place-items-center rounded-full bg-[#edf4f3] text-[#1d6571]"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 5 6v5c0 4.8 3 8.3 7 10 4-1.7 7-5.2 7-10V6l-7-3Z" stroke="currentColor" stroke-width="1.6"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <h3 class="mt-5 text-xl">Sehat dan terawat</h3><p class="mt-2 text-sm leading-6 text-slate-500">Air terjaga, pakan berkualitas, dan pemantauan rutin untuk setiap ikan.</p>
+          </article>
+          <article class="rounded-2xl bg-white p-7">
+            <span class="grid h-12 w-12 place-items-center rounded-full bg-[#fbf2df] text-[#a87827]"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8m0-12.8L5.6 18.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.5"/></svg></span>
+            <h3 class="mt-5 text-xl">Pilihan penuh karakter</h3><p class="mt-2 text-sm leading-6 text-slate-500">Dari warna solid hingga pola eksotis, setiap varietas punya pesonanya sendiri.</p>
+          </article>
+          <article class="rounded-2xl bg-white p-7">
+            <span class="grid h-12 w-12 place-items-center rounded-full bg-[#edf4f3] text-[#1d6571]"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7h11v10H3zM14 10h4l3 3v4h-7z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="7.5" cy="18" r="1.8" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="18" r="1.8" stroke="currentColor" stroke-width="1.5"/></svg></span>
+            <h3 class="mt-5 text-xl">Pendampingan langsung</h3><p class="mt-2 text-sm leading-6 text-slate-500">Kami siap berbagi panduan adaptasi dan perawatan setelah ikan sampai.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="kontak" class="bg-[#071d2b] text-white">
+    <div class="mx-auto grid max-w-7xl gap-10 px-5 py-14 md:grid-cols-[1.2fr_1fr_1fr] lg:px-8">
+      <div><p class="text-sm font-bold tracking-[.17em]">BLESSED DISCUS INDONESIA</p><p class="mt-4 max-w-xs text-sm leading-6 text-white/55">Membawa keindahan dan karakter Discus terbaik ke dalam akuarium Anda.</p></div>
+      <div><p class="text-xs font-bold uppercase tracking-[.18em] text-amber-300">Kunjungi farm</p><p class="mt-4 text-sm leading-6 text-white/65">Jl. Anggrek Kec. Tajur Halang<br>Kabupaten Bogor, Jawa Barat 40286</p><p class="mt-2 text-xs text-white/40">Senin–Sabtu, 09.00–17.00 WIB</p></div>
+      <div><p class="text-xs font-bold uppercase tracking-[.18em] text-amber-300">Mari terhubung</p><p class="mt-4 text-sm text-white/65">Konsultasi koleksi dan ketersediaan ikan.</p><a id="footer-whatsapp" href="#" target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white transition hover:text-amber-300"><span aria-hidden="true">↗</span> WhatsApp kami</a></div>
+    </div>
+    <div class="border-t border-white/10"><div class="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-5 text-[10px] text-white/35 sm:flex-row sm:justify-between lg:px-8"><span>© <span id="current-year"></span> Blessed Discus Indonesia. Dibuat dengan penuh perhatian.</span><span>Keindahan yang hidup.</span></div></div>
+  </footer>
+
+  <div id="login-modal" class="modal-backdrop fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="login-title">
+    <div class="relative w-full max-w-sm rounded-3xl bg-white p-8 shadow-2xl">
+      <button class="modal-close absolute right-5 top-5 rounded-full p-2 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700" type="button" aria-label="Tutup">✕</button>
+      <div class="grid h-12 w-12 place-items-center rounded-full bg-[#edf4f3] text-[#1d6571]"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+      <p class="mt-6 text-[10px] font-bold uppercase tracking-[.2em] text-[#b78735]">Area terbatas</p>
+      <h2 id="login-title" class="mt-2 text-3xl">Selamat datang.</h2>
+      <p class="mt-2 text-sm text-slate-500">Masukkan PIN admin untuk mengelola katalog.</p>
+      <form id="login-form" class="mt-6">
+        <label for="admin-pin" class="mb-2 block text-xs font-semibold text-slate-600">PIN Admin</label>
+        <input id="admin-pin" class="focus-ring h-12 w-full rounded-xl border border-slate-200 px-4 text-sm outline-none" type="password" inputmode="text" autocomplete="current-password" placeholder="Masukkan PIN" required>
+        <p id="login-error" class="mt-2 hidden text-xs text-red-600" role="alert">PIN tidak sesuai. Silakan coba lagi.</p>
+        <button class="mt-5 h-12 w-full rounded-xl bg-[#0b2b3a] text-sm font-bold text-white transition hover:bg-[#16495b]" type="submit">Masuk ke Dashboard</button>
+      </form>
+      <p class="mt-5 text-center text-[10px] text-slate-400">PIN awal: <span class="font-semibold text-slate-500">admin123</span></p>
+    </div>
+  </div>
+
+  <div id="admin-panel" class="fixed inset-0 z-[60] hidden overflow-y-auto bg-[#f5f7f7]">
+    <header class="sticky top-0 z-20 border-b border-slate-200 bg-white/95 backdrop-blur">
+      <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
+        <div class="flex items-center gap-3"><span class="grid h-10 w-10 place-items-center rounded-xl bg-[#0b2b3a] text-amber-300"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 12s3.2-6 9-6 9 6 9 6-3.2 6-9 6-9-6-9-6Z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/></svg></span><div><p class="text-sm font-bold text-[#092333]">Blessed Discus Indonesia</p><p class="text-[10px] text-slate-400">Panel manajemen</p></div></div>
+        <div class="flex items-center gap-2">
+          <button id="reset-data" class="focus-ring rounded-full border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-600 transition hover:border-red-200 hover:text-red-600 sm:px-4" type="button">Reset ke Data Awal</button>
+          <button id="exit-admin" class="focus-ring rounded-full bg-[#0b2b3a] px-4 py-2 text-xs font-semibold text-white transition hover:bg-[#16495b]" type="button">Keluar</button>
+        </div>
+      </div>
+    </header>
+    <main class="admin-scroll mx-auto max-w-7xl px-5 py-8 lg:px-8 lg:py-10">
+      <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><p class="text-[10px] font-bold uppercase tracking-[.2em] text-[#b78735]">Ringkasan farm</p><h1 class="mt-2 text-3xl">Dashboard stok ikan</h1><p class="mt-2 text-sm text-slate-500">Kelola koleksi dan pantau ketersediaan ikan Anda.</p></div><button id="add-fish" class="focus-ring inline-flex items-center justify-center gap-2 rounded-full bg-amber-400 px-5 py-3 text-sm font-bold text-[#132c36] transition hover:bg-amber-300" type="button"><span class="text-lg leading-none">+</span> Tambah jenis ikan</button></div>
+      <section id="dashboard-stats" class="mt-8 grid gap-4 sm:grid-cols-3" aria-label="Ringkasan stok"></section>
+      <section class="mt-8 overflow-hidden rounded-2xl border border-slate-200 bg-white">
+        <div class="flex flex-col justify-between gap-2 border-b border-slate-100 px-5 py-5 sm:flex-row sm:items-center"><div><h2 class="text-xl">Katalog ikan</h2><p class="mt-1 text-xs text-slate-400">Atur stok cepat atau perbarui detail varietas.</p></div><span id="admin-item-count" class="text-xs text-slate-400"></span></div>
+        <div id="admin-list" class="divide-y divide-slate-100"></div>
+      </section>
+      <p class="mt-5 text-center text-[10px] text-slate-400">Data katalog tersimpan di browser ini melalui localStorage.</p>
+    </main>
+  </div>
+
+  <div id="fish-modal" class="modal-backdrop fixed inset-0 z-[70] hidden items-center justify-center overflow-y-auto p-4" role="dialog" aria-modal="true" aria-labelledby="fish-modal-title">
+    <div class="my-auto w-full max-w-xl rounded-3xl bg-white p-6 shadow-2xl sm:p-8">
+      <div class="flex items-start justify-between"><div><p id="fish-modal-eyebrow" class="text-[10px] font-bold uppercase tracking-[.2em] text-[#b78735]">Katalog ikan</p><h2 id="fish-modal-title" class="mt-2 text-3xl">Tambah jenis ikan</h2></div><button class="modal-close rounded-full p-2 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700" type="button" aria-label="Tutup">✕</button></div>
+      <form id="fish-form" class="mt-6 grid gap-4 sm:grid-cols-2">
+        <input id="fish-id" type="hidden">
+        <label class="sm:col-span-2"><span class="mb-1.5 block text-xs font-semibold text-slate-600">Nama ikan</span><input id="fish-name" class="focus-ring h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none" maxlength="70" required></label>
+        <label><span class="mb-1.5 block text-xs font-semibold text-slate-600">Harga (Rupiah)</span><input id="fish-price" class="focus-ring h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none" type="number" min="0" step="1000" required></label>
+        <label><span class="mb-1.5 block text-xs font-semibold text-slate-600">Stok (ekor)</span><input id="fish-stock" class="focus-ring h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none" type="number" min="0" step="1" required></label>
+        <label><span class="mb-1.5 block text-xs font-semibold text-slate-600">Ukuran</span><select id="fish-size" class="focus-ring h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm outline-none"><option value="S">Kecil (S)</option><option value="M">Medium (M)</option><option value="L">Besar (L)</option></select></label>
+        <label><span class="mb-1.5 block text-xs font-semibold text-slate-600">Grade</span><select id="fish-grade" class="focus-ring h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm outline-none"><option value="A">Grade A</option><option value="Premium">Premium</option><option value="Wild">Wild</option></select></label>
+        <label class="sm:col-span-2"><span class="mb-1.5 block text-xs font-semibold text-slate-600">Deskripsi / karakteristik</span><textarea id="fish-description" class="focus-ring w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm outline-none" rows="3" maxlength="260" required></textarea></label>
+        <label class="sm:col-span-2"><span class="mb-1.5 block text-xs font-semibold text-slate-600">URL gambar</span><input id="fish-image" class="focus-ring h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none" type="url" required></label>
+        <div class="mt-2 flex justify-end gap-3 sm:col-span-2"><button class="modal-close rounded-full border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-600 transition hover:bg-slate-50" type="button">Batal</button><button class="rounded-full bg-[#0b2b3a] px-6 py-2.5 text-sm font-bold text-white transition hover:bg-[#16495b]" type="submit">Simpan ikan</button></div>
+      </form>
+    </div>
+  </div>
+  <div id="toast" class="pointer-events-none fixed bottom-5 left-1/2 z-[80] -translate-x-1/2 translate-y-4 rounded-full bg-[#0b2b3a] px-5 py-3 text-sm font-medium text-white opacity-0 shadow-xl transition-all" role="status" aria-live="polite"></div>
+
+  <script>
+    (() => {
+      "use strict";
+      const STORAGE_KEY = "royalDiscusCatalogV1";
+      const WHATSAPP_NUMBER = "6285121959757";
+      const fishPhoto = "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85";
+      const initialFish = [
+        { id: "blue-diamond", name: "Blue Diamond Discus", size: "M", grade: "Premium", cm: "12–15", temperament: "Tenang", price: 450000, stock: 12, description: "Biru safir solid berkilau dengan bentuk tubuh bulat dan elegan.", image: fishPhoto },
+        { id: "red-melon", name: "Red Melon Discus", size: "M", grade: "A", cm: "10–14", temperament: "Damai", price: 375000, stock: 8, description: "Merah melon cerah dan merata, menjadi titik fokus akuarium.", image: fishPhoto },
+        { id: "pigeon-blood", name: "Pigeon Blood Discus", size: "L", grade: "Premium", cm: "13–16", temperament: "Tenang", price: 550000, stock: 5, description: "Corak merah-oranye berpadu bintik putih khas yang ekspresif.", image: fishPhoto },
+        { id: "red-turquoise", name: "Turquoise Discus", size: "M", grade: "A", cm: "11–14", temperament: "Damai", price: 425000, stock: 10, description: "Garis turquoise merah dan biru membentuk pola yang memikat.", image: fishPhoto },
+        { id: "heckel-wild", name: "Heckel Discus (Wild)", size: "L", grade: "Wild", cm: "14–18", temperament: "Sensitif", price: 1250000, stock: 3, description: "Varietas wild dengan garis tengah tegas dan karakter autentik.", image: fishPhoto },
+        { id: "leopard-snake-skin", name: "Leopard Snake Skin Discus", size: "M", grade: "Premium", cm: "12–15", temperament: "Aktif", price: 700000, stock: 7, description: "Pola bintik dan garis snake skin rapat dengan warna yang kontras.", image: fishPhoto },
+        { id: "golden-sunrise", name: "Golden Sunrise / Yellow Crystal", size: "M", grade: "A", cm: "10–14", temperament: "Damai", price: 475000, stock: 0, description: "Kuning keemasan lembut yang menyala indah di bawah pencahayaan.", image: fishPhoto },
+        { id: "white-butterfly", name: "White Butterfly Discus", size: "S", grade: "A", cm: "8–11", temperament: "Tenang", price: 325000, stock: 9, description: "Warna putih bersih dengan tepian halus menyerupai sayap kupu-kupu.", image: fishPhoto },
+        { id: "cobalt-blue", name: "Cobalt Blue Discus", size: "L", grade: "Premium", cm: "13–16", temperament: "Damai", price: 650000, stock: 4, description: "Biru kobalt pekat dengan kilau metalik yang menawan.", image: fishPhoto },
+        { id: "checkerboard-pigeon", name: "Checkerboard Pigeon Discus", size: "M", grade: "A", cm: "11–14", temperament: "Aktif", price: 500000, stock: 6, description: "Motif checkerboard merah cerah dengan pola simetris yang unik.", image: fishPhoto }
+      ];
+
+      const $ = (selector) => document.querySelector(selector);
+      const grid = $("#catalog-grid");
+      const adminPanel = $("#admin-panel");
+      const loginModal = $("#login-modal");
+      const fishModal = $("#fish-modal");
+      let fish = loadFish();
+      let toastTimer;
+
+      function loadFish() {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved === null) return structuredClone(initialFish);
+        try {
+          const parsed = JSON.parse(saved);
+          if (!Array.isArray(parsed) || parsed.some((item) => !isValidFish(item))) throw new Error("Format katalog tidak valid.");
+          return parsed;
+        } catch (error) {
+          console.error("Gagal membaca data katalog dari localStorage.", error);
+          alert("Data katalog tersimpan tidak dapat dibaca. Data awal dimuat kembali.");
+          localStorage.removeItem(STORAGE_KEY);
+          return structuredClone(initialFish);
+        }
+      }
+
+      function isValidFish(item) {
+        return item && typeof item.id === "string" && typeof item.name === "string" &&
+          typeof item.description === "string" && typeof item.image === "string" &&
+          Number.isFinite(item.price) && item.price >= 0 && Number.isInteger(item.stock) && item.stock >= 0 &&
+          ["S", "M", "L"].includes(item.size) && typeof item.grade === "string";
+      }
+
+      function saveFish() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(fish));
+        } catch (error) {
+          console.error("Gagal menyimpan katalog ke localStorage.", error);
+          alert("Perubahan tidak dapat disimpan. Periksa ruang penyimpanan browser Anda.");
+          return false;
+        }
+        renderAll();
+        return true;
+      }
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
+      }
+      function formatRupiah(value) {
+        return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(value);
+      }
+      function whatsappLink(item) {
+        const message = `Halo Blessed Discus Indonesia, saya tertarik dengan ${item.name} (${formatRupiah(item.price)}). Apakah stok masih tersedia?`;
+        return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+      }
+
+      function renderCatalog() {
+        const query = $("#search-input").value.trim().toLocaleLowerCase("id");
+        const category = $("#category-filter").value;
+        const filtered = fish.filter((item) => {
+          const matchesQuery = item.name.toLocaleLowerCase("id").includes(query);
+          const matchesCategory = category === "all" || item.size === category || item.grade === category;
+          return matchesQuery && matchesCategory;
+        });
+        $("#catalog-count").textContent = `${filtered.length} koleksi ditampilkan`;
+        $("#empty-results").classList.toggle("hidden", filtered.length !== 0);
+        grid.classList.toggle("hidden", filtered.length === 0);
+        grid.innerHTML = filtered.map((item) => `
+          <article class="fish-card overflow-hidden rounded-2xl border border-slate-100 bg-white">
+            <div class="relative h-56 overflow-hidden bg-gradient-to-br from-[#dce9e7] to-[#a7c7c7]">
+              <img class="fish-image h-full w-full object-cover" src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}" loading="lazy" onerror="this.style.display='none'">
+              <span class="absolute left-4 top-4 rounded-full border border-white/70 bg-white/85 px-3 py-1 text-[10px] font-semibold text-[#214653] backdrop-blur">${escapeHtml(item.grade)} · ${escapeHtml(item.size)}</span>
+              <span class="absolute right-4 top-4 rounded-full px-3 py-1 text-[10px] font-semibold ${item.stock > 0 ? "bg-[#e7f2eb] text-[#38704c]" : "bg-red-100 text-red-700"}">${item.stock > 0 ? `Stok: ${item.stock} ekor` : "Habis"}</span>
+              <span class="absolute bottom-3 left-4 rounded-full bg-[#092333]/65 px-3 py-1 text-[10px] text-white backdrop-blur">${escapeHtml(item.cm)} cm · ${escapeHtml(item.temperament)}</span>
+            </div>
+            <div class="p-5">
+              <h3 class="min-h-[3.5rem] text-xl leading-7">${escapeHtml(item.name)}</h3>
+              <p class="mt-2 min-h-[3rem] text-xs leading-5 text-slate-500">${escapeHtml(item.description)}</p>
+              <div class="mt-5 flex items-center justify-between gap-2 border-t border-slate-100 pt-4">
+                <span class="text-sm font-bold text-[#0b3445]">${formatRupiah(item.price)}</span>
+                <a href="${whatsappLink(item)}" target="_blank" rel="noopener noreferrer" class="focus-ring rounded-full bg-[#0b2b3a] px-4 py-2.5 text-[11px] font-bold text-white transition hover:bg-[#16495b]" aria-label="Pesan ${escapeHtml(item.name)} via WhatsApp">Pesan via WA ↗</a>
+              </div>
+            </div>
+          </article>`).join("");
+      }
+
+      function renderDashboard() {
+        const totalStock = fish.reduce((total, item) => total + item.stock, 0);
+        const lowStock = fish.filter((item) => item.stock <= 5).length;
+        const stats = [
+          { label: "Total jenis ikan", value: fish.length, hint: "Varietas dalam katalog", icon: "◉", tone: "text-[#287080] bg-[#edf4f3]" },
+          { label: "Total stok tersedia", value: totalStock.toLocaleString("id-ID"), hint: "Ekor siap dipilih", icon: "≈", tone: "text-[#a87827] bg-[#fbf2df]" },
+          { label: "Menipis / habis", value: lowStock, hint: "Stok 5 ekor atau kurang", icon: "!", tone: "text-[#b7463e] bg-[#fff0ed]" }
+        ];
+        $("#dashboard-stats").innerHTML = stats.map((stat) => `<article class="rounded-2xl border border-slate-200 bg-white p-5"><div class="flex items-start justify-between"><div><p class="text-xs font-medium text-slate-500">${stat.label}</p><p class="mt-3 text-3xl font-semibold text-[#092333]">${stat.value}</p><p class="mt-1 text-[10px] text-slate-400">${stat.hint}</p></div><span class="grid h-10 w-10 place-items-center rounded-xl text-lg font-bold ${stat.tone}">${stat.icon}</span></div></article>`).join("");
+        $("#admin-item-count").textContent = `${fish.length} jenis`;
+        $("#admin-list").innerHTML = fish.length ? fish.map((item) => `
+          <article class="flex flex-col gap-4 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+            <div class="flex min-w-0 items-center gap-4">
+              <img class="h-14 w-14 shrink-0 rounded-xl bg-slate-100 object-cover" src="${escapeHtml(item.image)}" alt="" onerror="this.style.display='none'">
+              <div class="min-w-0"><h3 class="truncate text-sm font-bold text-[#092333]">${escapeHtml(item.name)}</h3><p class="mt-1 text-xs text-slate-400">${escapeHtml(item.grade)} · ${escapeHtml(item.size)} · ${formatRupiah(item.price)}</p><p class="mt-1 text-[10px] ${item.stock <= 5 ? "font-semibold text-red-600" : "text-slate-400"}">${item.stock === 0 ? "Stok habis" : `${item.stock} ekor tersedia`}</p></div>
+            </div>
+            <div class="flex items-center justify-between gap-3 sm:justify-end">
+              <div class="flex items-center rounded-full border border-slate-200">
+                <button data-action="decrease" data-id="${escapeHtml(item.id)}" class="focus-ring grid h-9 w-9 place-items-center rounded-l-full text-lg text-slate-500 transition hover:bg-slate-50 disabled:opacity-30" type="button" aria-label="Kurangi stok ${escapeHtml(item.name)}" ${item.stock === 0 ? "disabled" : ""}>−</button>
+                <input data-stock-id="${escapeHtml(item.id)}" class="w-12 border-x border-slate-200 py-2 text-center text-xs font-semibold outline-none" type="number" min="0" step="1" value="${item.stock}" aria-label="Jumlah stok ${escapeHtml(item.name)}">
+                <button data-action="increase" data-id="${escapeHtml(item.id)}" class="focus-ring grid h-9 w-9 place-items-center rounded-r-full text-lg text-slate-500 transition hover:bg-slate-50" type="button" aria-label="Tambah stok ${escapeHtml(item.name)}">+</button>
+              </div>
+              <button data-action="edit" data-id="${escapeHtml(item.id)}" class="focus-ring rounded-full border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-600 transition hover:border-[#9bbcc0] hover:text-[#145363]" type="button">Edit</button>
+              <button data-action="delete" data-id="${escapeHtml(item.id)}" class="focus-ring rounded-full px-3 py-2 text-xs font-semibold text-red-500 transition hover:bg-red-50" type="button" aria-label="Hapus ${escapeHtml(item.name)}">Hapus</button>
+            </div>
+          </article>`).join("") : `<p class="px-5 py-12 text-center text-sm text-slate-400">Belum ada jenis ikan. Tambahkan koleksi pertama Anda.</p>`;
+      }
+
+      function renderAll() {
+        renderCatalog();
+        renderDashboard();
+      }
+
+      function showToast(message) {
+        const toast = $("#toast");
+        toast.textContent = message;
+        toast.classList.remove("translate-y-4", "opacity-0");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.add("translate-y-4", "opacity-0"), 2400);
+      }
+
+      function showModal(modal) {
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      }
+      function hideModal(modal) {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+
+      function openFishForm(item) {
+        $("#fish-form").reset();
+        $("#fish-id").value = item ? item.id : "";
+        $("#fish-modal-title").textContent = item ? "Edit jenis ikan" : "Tambah jenis ikan";
+        $("#fish-modal-eyebrow").textContent = item ? "Perbarui katalog" : "Koleksi baru";
+        $("#fish-name").value = item ? item.name : "";
+        $("#fish-price").value = item ? item.price : "";
+        $("#fish-stock").value = item ? item.stock : 0;
+        $("#fish-size").value = item ? item.size : "M";
+        $("#fish-grade").value = item ? item.grade : "A";
+        $("#fish-description").value = item ? item.description : "";
+        $("#fish-image").value = item ? item.image : fishPhoto;
+        showModal(fishModal);
+        $("#fish-name").focus();
+      }
+
+      $("#search-input").addEventListener("input", renderCatalog);
+      $("#category-filter").addEventListener("change", renderCatalog);
+      $("#mobile-menu-toggle").addEventListener("click", () => {
+        const isExpanded = $("#mobile-menu-toggle").getAttribute("aria-expanded") === "true";
+        $("#mobile-menu-toggle").setAttribute("aria-expanded", String(!isExpanded));
+        $("#mobile-menu-toggle").setAttribute("aria-label", isExpanded ? "Buka menu navigasi" : "Tutup menu navigasi");
+        $("#mobile-nav").classList.toggle("hidden", isExpanded);
+      });
+      document.querySelectorAll(".mobile-nav-link").forEach((link) => link.addEventListener("click", () => {
+        $("#mobile-nav").classList.add("hidden");
+        $("#mobile-menu-toggle").setAttribute("aria-expanded", "false");
+        $("#mobile-menu-toggle").setAttribute("aria-label", "Buka menu navigasi");
+      }));
+      $("#admin-entry").addEventListener("click", () => {
+        $("#admin-pin").value = "";
+        $("#login-error").classList.add("hidden");
+        showModal(loginModal);
+        $("#admin-pin").focus();
+      });
+      $("#login-form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        if ($("#admin-pin").value !== "admin123") {
+          $("#login-error").classList.remove("hidden");
+          $("#admin-pin").focus();
+          return;
+        }
+        hideModal(loginModal);
+        renderDashboard();
+        adminPanel.classList.remove("hidden");
+        document.body.classList.add("overflow-hidden");
+      });
+      $("#exit-admin").addEventListener("click", () => {
+        adminPanel.classList.add("hidden");
+        document.body.classList.remove("overflow-hidden");
+      });
+      document.querySelectorAll(".modal-close").forEach((button) => button.addEventListener("click", () => {
+        hideModal(button.closest("#login-modal, #fish-modal"));
+      }));
+      [loginModal, fishModal].forEach((modal) => modal.addEventListener("click", (event) => {
+        if (event.target === modal) hideModal(modal);
+      }));
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          hideModal(loginModal);
+          hideModal(fishModal);
+          $("#mobile-nav").classList.add("hidden");
+          $("#mobile-menu-toggle").setAttribute("aria-expanded", "false");
+          $("#mobile-menu-toggle").setAttribute("aria-label", "Buka menu navigasi");
+        }
+      });
+      $("#add-fish").addEventListener("click", () => openFishForm(null));
+      $("#fish-form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const id = $("#fish-id").value || `fish-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+        const existing = fish.find((item) => item.id === id);
+        const record = {
+          id,
+          name: $("#fish-name").value.trim(),
+          price: Number($("#fish-price").value),
+          stock: Number($("#fish-stock").value),
+          size: $("#fish-size").value,
+          grade: $("#fish-grade").value,
+          description: $("#fish-description").value.trim(),
+          image: $("#fish-image").value.trim(),
+          cm: existing ? existing.cm : "10–14",
+          temperament: existing ? existing.temperament : "Damai"
+        };
+        if (!isValidFish(record)) {
+          alert("Mohon periksa kembali nama, harga, stok, ukuran, dan URL gambar.");
+          return;
+        }
+        if (existing) fish = fish.map((item) => item.id === id ? record : item);
+        else fish = [record, ...fish];
+        if (saveFish()) {
+          hideModal(fishModal);
+          showToast(existing ? "Data ikan berhasil diperbarui." : "Jenis ikan baru berhasil ditambahkan.");
+        }
+      });
+
+      $("#admin-list").addEventListener("click", (event) => {
+        const button = event.target.closest("button[data-action]");
+        if (!button) return;
+        const item = fish.find((entry) => entry.id === button.dataset.id);
+        if (!item) return;
+        if (button.dataset.action === "increase" || button.dataset.action === "decrease") {
+          const change = button.dataset.action === "increase" ? 1 : -1;
+          fish = fish.map((entry) => entry.id === item.id ? { ...entry, stock: Math.max(0, entry.stock + change) } : entry);
+          if (saveFish()) showToast("Stok berhasil diperbarui.");
+        } else if (button.dataset.action === "edit") {
+          openFishForm(item);
+        } else if (button.dataset.action === "delete") {
+          if (!confirm(`Hapus ${item.name} dari katalog?`)) return;
+          fish = fish.filter((entry) => entry.id !== item.id);
+          if (saveFish()) showToast("Jenis ikan dihapus dari katalog.");
+        }
+      });
+      $("#admin-list").addEventListener("change", (event) => {
+        const input = event.target.closest("input[data-stock-id]");
+        if (!input) return;
+        const value = Number(input.value);
+        if (!Number.isInteger(value) || value < 0) {
+          alert("Stok harus berupa bilangan bulat nol atau lebih.");
+          renderDashboard();
+          return;
+        }
+        fish = fish.map((item) => item.id === input.dataset.stockId ? { ...item, stock: value } : item);
+        if (saveFish()) showToast("Stok berhasil diperbarui.");
+      });
+      $("#reset-data").addEventListener("click", () => {
+        if (!confirm("Kembalikan katalog dan stok ke 10 data awal? Semua perubahan saat ini akan dihapus.")) return;
+        fish = structuredClone(initialFish);
+        if (saveFish()) showToast("Katalog dikembalikan ke data awal.");
+      });
+      window.addEventListener("storage", (event) => {
+        if (event.key === STORAGE_KEY) {
+          fish = loadFish();
+          renderAll();
+          showToast("Katalog diperbarui dari tab lain.");
+        }
+      });
+      $("#footer-whatsapp").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Halo Blessed Discus Indonesia, saya ingin bertanya tentang koleksi Discus.")}`;
+      $("#current-year").textContent = new Date().getFullYear();
+      renderAll();
+    })();
+  </script>
+</body>
+</html>
