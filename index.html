@@ -212,4 +212,146 @@
 
   <!-- Modal Form Ikan -->
   <div id="fish-modal" class="modal-backdrop fixed inset-0 z-[110] hidden items-center justify-center overflow-y-auto p-4" role="dialog" aria-modal="true" aria-labelledby="fish-modal-title">
-    <div class="my-auto w-
+    <div class="my-auto w-full max-w-xl rounded-3xl bg-white p-6 shadow-2xl sm:p-8">
+      <div class="flex items-start justify-between"><div><p id="fish-modal-eyebrow" class="text-[10px] font-bold uppercase tracking-[.2em] text-[#b78735]">Katalog ikan</p><h2 id="fish-modal-title" class="mt-2 text-3xl">Tambah jenis ikan</h2></div><button class="modal-close rounded-full p-2 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700" type="button" aria-label="Tutup">✕</button></div>
+      <form id="fish-form" class="mt-6 grid gap-4 sm:grid-cols-2">
+        <input id="fish-id" type="hidden">
+        <label class="sm:col-span-2"><span class="mb-1.5 block text-xs font-semibold text-slate-600">Nama ikan</span><input id="fish-name" class="focus-ring h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none" maxlength="70" required></label>
+        <label><span class="mb-1.5 block text-xs font-semibold text-slate-600">Harga (Rupiah)</span><input id="fish-price" class="focus-ring h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none" type="number" min="0" step="1000" required></label>
+        <label><span class="mb-1.5 block text-xs font-semibold text-slate-600">Stok (ekor)</span><input id="fish-stock" class="focus-ring h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none" type="number" min="0" step="1" required></label>
+        <label><span class="mb-1.5 block text-xs font-semibold text-slate-600">Ukuran</span><select id="fish-size" class="focus-ring h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm outline-none"><option value="S">Kecil (S)</option><option value="M">Medium (M)</option><option value="L">Besar (L)</option></select></label>
+        <label><span class="mb-1.5 block text-xs font-semibold text-slate-600">Grade</span><select id="fish-grade" class="focus-ring h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm outline-none"><option value="A">Grade A</option><option value="Premium">Premium</option><option value="Wild">Wild</option></select></label>
+        <label class="sm:col-span-2"><span class="mb-1.5 block text-xs font-semibold text-slate-600">Deskripsi / karakteristik</span><textarea id="fish-description" class="focus-ring w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm outline-none" rows="3" maxlength="260" required></textarea></label>
+        <label class="sm:col-span-2"><span class="mb-1.5 block text-xs font-semibold text-slate-600">URL gambar</span><input id="fish-image" class="focus-ring h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none" type="url" required></label>
+        <div class="mt-2 flex justify-end gap-3 sm:col-span-2"><button class="modal-close rounded-full border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-600 transition hover:bg-slate-50" type="button">Batal</button><button id="save-fish-btn" class="rounded-full bg-[#0b2b3a] px-6 py-2.5 text-sm font-bold text-white transition hover:bg-[#16495b]" type="submit">Simpan ikan</button></div>
+      </form>
+    </div>
+  </div>
+  <div id="toast" class="pointer-events-none fixed bottom-5 left-1/2 z-[120] -translate-x-1/2 translate-y-4 rounded-full bg-[#0b2b3a] px-5 py-3 text-sm font-medium text-white opacity-0 shadow-xl transition-all" role="status" aria-live="polite"></div>
+
+  <script>
+    (() => {
+      "use strict";
+      const $ = (selector) => document.querySelector(selector);
+      const grid = $("#catalog-grid");
+      const adminPanel = $("#admin-panel");
+      const loginModal = $("#login-modal");
+      const fishModal = $("#fish-modal");
+
+      const SUPABASE_URL = "https://virdyocbxutndpollqhp.supabase.co";
+      const SUPABASE_KEY = "sb_publishable_TCEwyHRv9tUlLfGtlwOebA_W68gV71V";
+      const REST_ENDPOINT = `${SUPABASE_URL}/rest/v1/fish`;
+      const API_HEADERS = {
+        "apikey": SUPABASE_KEY,
+        "Authorization": `Bearer ${SUPABASE_KEY}`,
+        "Content-Type": "application/json",
+        "Prefer": "return=representation"
+      };
+
+      const WHATSAPP_NUMBER = "6285121959757";
+      const fishPhoto = "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85";
+      const initialFish = [
+        { id: "blue-diamond", name: "Blue Diamond Discus", size: "M", grade: "Premium", cm: "12–15", temperament: "Tenang", price: 450000, stock: 12, description: "Biru safir solid berkilau dengan bentuk tubuh bulat dan elegan.", image: fishPhoto },
+        { id: "red-melon", name: "Red Melon Discus", size: "M", grade: "A", cm: "10–14", temperament: "Damai", price: 375000, stock: 8, description: "Merah melon cerah dan merata, menjadi titik fokus akuarium.", image: fishPhoto },
+        { id: "pigeon-blood", name: "Pigeon Blood Discus", size: "L", grade: "Premium", cm: "13–16", temperament: "Tenang", price: 550000, stock: 5, description: "Corak merah-oranye berpadu bintik putih khas yang ekspresif.", image: fishPhoto },
+        { id: "red-turquoise", name: "Turquoise Discus", size: "M", grade: "A", cm: "11–14", temperament: "Damai", price: 425000, stock: 10, description: "Garis turquoise merah dan biru membentuk pola yang memikat.", image: fishPhoto },
+        { id: "heckel-wild", name: "Heckel Discus (Wild)", size: "L", grade: "Wild", cm: "14–18", temperament: "Sensitif", price: 1250000, stock: 3, description: "Varietas wild dengan garis tengah tegas dan karakter autentik.", image: fishPhoto },
+        { id: "leopard-snake-skin", name: "Leopard Snake Skin Discus", size: "M", grade: "Premium", cm: "12–15", temperament: "Aktif", price: 700000, stock: 7, description: "Pola bintik dan garis snake skin rapat dengan warna yang kontras.", image: fishPhoto },
+        { id: "golden-sunrise", name: "Golden Sunrise / Yellow Crystal", size: "M", grade: "A", cm: "10–14", temperament: "Damai", price: 475000, stock: 0, description: "Kuning keemasan lembut yang menyala indah di bawah pencahayaan.", image: fishPhoto },
+        { id: "white-butterfly", name: "White Butterfly Discus", size: "S", grade: "A", cm: "8–11", temperament: "Tenang", price: 325000, stock: 9, description: "Warna putih bersih dengan tepian halus menyerupai sayap kupu-kupu.", image: fishPhoto },
+        { id: "cobalt-blue", name: "Cobalt Blue Discus", size: "L", grade: "Premium", cm: "13–16", temperament: "Damai", price: 650000, stock: 4, description: "Biru kobalt pekat dengan kilau metalik yang menawan.", image: fishPhoto },
+        { id: "checkerboard-pigeon", name: "Checkerboard Pigeon Discus", size: "M", grade: "A", cm: "11–14", temperament: "Aktif", price: 500000, stock: 6, description: "Motif checkerboard merah cerah dengan pola simetris yang unik.", image: fishPhoto }
+      ];
+
+      let fish = [];
+      let toastTimer;
+
+      function showModal(modal) {
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      }
+      function hideModal(modal) {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+      function showToast(message) {
+        const toast = $("#toast");
+        toast.textContent = message;
+        toast.classList.remove("translate-y-4", "opacity-0");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.add("translate-y-4", "opacity-0"), 2400);
+      }
+
+      // Tombol Admin langsung aktif
+      $("#admin-entry").addEventListener("click", () => {
+        $("#admin-pin").value = "";
+        $("#login-error").classList.add("hidden");
+        showModal(loginModal);
+        $("#admin-pin").focus();
+      });
+
+      $("#login-form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        if ($("#admin-pin").value !== "admin123") {
+          $("#login-error").classList.remove("hidden");
+          $("#admin-pin").focus();
+          return;
+        }
+        hideModal(loginModal);
+        renderDashboard();
+        adminPanel.classList.remove("hidden");
+        document.body.classList.add("overflow-hidden");
+      });
+
+      $("#exit-admin").addEventListener("click", () => {
+        adminPanel.classList.add("hidden");
+        document.body.classList.remove("overflow-hidden");
+      });
+
+      document.querySelectorAll(".modal-close").forEach((button) => button.addEventListener("click", () => {
+        hideModal(button.closest("#login-modal, #fish-modal"));
+      }));
+
+      [loginModal, fishModal].forEach((modal) => modal.addEventListener("click", (event) => {
+        if (event.target === modal) hideModal(modal);
+      }));
+
+      $("#mobile-menu-toggle").addEventListener("click", () => {
+        const isExpanded = $("#mobile-menu-toggle").getAttribute("aria-expanded") === "true";
+        $("#mobile-menu-toggle").setAttribute("aria-expanded", String(!isExpanded));
+        $("#mobile-nav").classList.toggle("hidden", isExpanded);
+      });
+
+      document.querySelectorAll(".mobile-nav-link").forEach((link) => link.addEventListener("click", () => {
+        $("#mobile-nav").classList.add("hidden");
+        $("#mobile-menu-toggle").setAttribute("aria-expanded", "false");
+      }));
+
+      function mapRowToFish(row) {
+        return {
+          id: String(row.id ?? `fish-${Math.random().toString(36).slice(2, 7)}`),
+          name: row.nama || "Discus Tanpa Nama",
+          price: Number(row.harga) || 0,
+          stock: Number(row.stock) || 0,
+          image: row.foto_url || fishPhoto,
+          size: row.size || "M",
+          grade: row.grade || "A",
+          cm: row.cm || "10–14",
+          temperament: row.temperament || "Damai",
+          description: row.description || "Discus pilihan sehat dan terawat."
+        };
+      }
+
+      function mapFishToRow(item) {
+        return {
+          id: item.id,
+          nama: item.name,
+          harga: item.price,
+          stock: String(item.stock),
+          foto_url: item.image,
+          size: item.size,
+          grade: item.grade,
+          cm: item.cm,
+          temperament: item.temperament,
+          description: item.description
+        };
