@@ -14,14 +14,14 @@
   {
     "id": "red-melon",
     "name": "Red Melon Discus",
-    "size": "M",
-    "grade": "A",
-    "cm": "10–14",
-    "temperament": "Damai",
     "price": 375000,
     "stock": 8,
+    "size": "M",
+    "grade": "A",
     "description": "Merah melon cerah dan merata, menjadi titik fokus akuarium.",
-    "image": "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85"
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxKujMhmhcUs6hK56A9tHq3dSAqyuw4h9UgKIa2trg31MNDb6GMBrSGHE&s=10",
+    "cm": "10–14",
+    "temperament": "Damai"
   },
   {
     "id": "pigeon-blood",
