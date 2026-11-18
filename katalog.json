@@ -50,14 +50,14 @@
   {
     "id": "heckel-wild",
     "name": "Heckel Discus (Wild)",
-    "size": "L",
-    "grade": "Wild",
-    "cm": "14–18",
-    "temperament": "Sensitif",
     "price": 1250000,
     "stock": 3,
+    "size": "L",
+    "grade": "Wild",
     "description": "Varietas wild dengan garis tengah tegas dan karakter autentik.",
-    "image": "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85"
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHQk1mEC6UmaZppuvrl7grYzEC3qgXfWX2wNHsAbsNWTWK74xCnwPyyho&s=10",
+    "cm": "14–18",
+    "temperament": "Sensitif"
   },
   {
     "id": "leopard-snake-skin",
