@@ -7,7 +7,6 @@
   <meta name="description" content="Discus pilihan dengan kualitas premium dari Blessed Discus Indonesia.">
   <title>Blessed Discus Indonesia — Keindahan yang Hidup</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
@@ -36,13 +35,10 @@
     .admin-scroll::-webkit-scrollbar { width: 7px; }
     .admin-scroll::-webkit-scrollbar-thumb { background: #d5dfe2; border-radius: 10px; }
     .focus-ring:focus { outline: 3px solid rgba(215, 166, 75, .45); outline-offset: 2px; }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
-    }
   </style>
 </head>
 <body class="bg-[#fbfaf7]">
-  <header class="absolute inset-x-0 top-0 z-30 text-white">
+  <header class="absolute inset-x-0 top-0 z-40 text-white">
     <nav class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 sm:px-5 sm:py-5 lg:px-8" aria-label="Navigasi utama">
       <a href="#beranda" class="flex items-center gap-3" aria-label="Blessed Discus Indonesia, beranda">
         <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-amber-300/50 bg-white/5 text-amber-300 sm:h-10 sm:w-10">
@@ -57,7 +53,7 @@
         <a class="transition hover:text-amber-300" href="#keunggulan">Keunggulan</a>
         <a class="transition hover:text-amber-300" href="#kontak">Kontak</a>
       </div>
-      <button id="admin-entry" class="focus-ring flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-xs font-semibold tracking-wide transition hover:border-amber-300/70 hover:text-amber-200" type="button" aria-label="Masuk ke mode admin">
+      <button id="admin-entry" class="focus-ring relative z-50 flex cursor-pointer items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-xs font-semibold tracking-wide transition hover:border-amber-300/70 hover:text-amber-200" type="button" aria-label="Masuk ke mode admin">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM5 20a7 7 0 0 1 14 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
         <span>Admin</span>
       </button>
@@ -102,8 +98,6 @@
           <div class="absolute bottom-4 left-2 rounded-2xl border border-white/15 bg-[#0b2936]/90 p-4 shadow-xl backdrop-blur">
             <p class="text-[9px] uppercase tracking-[.2em] text-amber-300">Pilihan kurator</p><p class="serif mt-1 text-lg">Warna yang memikat</p>
           </div>
-          <span class="absolute right-0 top-3 h-24 w-24 rounded-full border border-amber-300/20"></span>
-          <span class="absolute right-[-12px] top-[-9px] h-24 w-24 rounded-full border border-amber-300/20"></span>
         </div>
       </div>
       <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-300/50 to-transparent"></div>
@@ -177,7 +171,8 @@
     <div class="border-t border-white/10"><div class="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-5 text-[10px] text-white/35 sm:flex-row sm:justify-between lg:px-8"><span>© <span id="current-year"></span> Blessed Discus Indonesia. Dibuat dengan penuh perhatian.</span><span>Keindahan yang hidup.</span></div></div>
   </footer>
 
-  <div id="login-modal" class="modal-backdrop fixed inset-0 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="login-title">
+  <!-- Modal Login Admin -->
+  <div id="login-modal" class="modal-backdrop fixed inset-0 z-[90] hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="login-title">
     <div class="relative w-full max-w-sm rounded-3xl bg-white p-8 shadow-2xl">
       <button class="modal-close absolute right-5 top-5 rounded-full p-2 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700" type="button" aria-label="Tutup">✕</button>
       <div class="grid h-12 w-12 place-items-center rounded-full bg-[#edf4f3] text-[#1d6571]"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
@@ -193,7 +188,8 @@
     </div>
   </div>
 
-  <div id="admin-panel" class="fixed inset-0 z-[60] hidden overflow-y-auto bg-[#f5f7f7]">
+  <!-- Dashboard Admin -->
+  <div id="admin-panel" class="fixed inset-0 z-[100] hidden overflow-y-auto bg-[#f5f7f7]">
     <header class="sticky top-0 z-20 border-b border-slate-200 bg-white/95 backdrop-blur">
       <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
         <div class="flex items-center gap-3"><span class="grid h-10 w-10 place-items-center rounded-xl bg-[#0b2b3a] text-amber-300"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 12s3.2-6 9-6 9 6 9 6-3.2 6-9 6-9-6-9-6Z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/></svg></span><div><p class="text-sm font-bold text-[#092333]">Blessed Discus Indonesia</p><p class="text-[10px] text-slate-400">Panel manajemen</p></div></div>
@@ -214,125 +210,6 @@
     </main>
   </div>
 
-  <div id="fish-modal" class="modal-backdrop fixed inset-0 z-[70] hidden items-center justify-center overflow-y-auto p-4" role="dialog" aria-modal="true" aria-labelledby="fish-modal-title">
-    <div class="my-auto w-full max-w-xl rounded-3xl bg-white p-6 shadow-2xl sm:p-8">
-      <div class="flex items-start justify-between"><div><p id="fish-modal-eyebrow" class="text-[10px] font-bold uppercase tracking-[.2em] text-[#b78735]">Katalog ikan</p><h2 id="fish-modal-title" class="mt-2 text-3xl">Tambah jenis ikan</h2></div><button class="modal-close rounded-full p-2 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700" type="button" aria-label="Tutup">✕</button></div>
-      <form id="fish-form" class="mt-6 grid gap-4 sm:grid-cols-2">
-        <input id="fish-id" type="hidden">
-        <label class="sm:col-span-2"><span class="mb-1.5 block text-xs font-semibold text-slate-600">Nama ikan</span><input id="fish-name" class="focus-ring h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none" maxlength="70" required></label>
-        <label><span class="mb-1.5 block text-xs font-semibold text-slate-600">Harga (Rupiah)</span><input id="fish-price" class="focus-ring h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none" type="number" min="0" step="1000" required></label>
-        <label><span class="mb-1.5 block text-xs font-semibold text-slate-600">Stok (ekor)</span><input id="fish-stock" class="focus-ring h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none" type="number" min="0" step="1" required></label>
-        <label><span class="mb-1.5 block text-xs font-semibold text-slate-600">Ukuran</span><select id="fish-size" class="focus-ring h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm outline-none"><option value="S">Kecil (S)</option><option value="M">Medium (M)</option><option value="L">Besar (L)</option></select></label>
-        <label><span class="mb-1.5 block text-xs font-semibold text-slate-600">Grade</span><select id="fish-grade" class="focus-ring h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm outline-none"><option value="A">Grade A</option><option value="Premium">Premium</option><option value="Wild">Wild</option></select></label>
-        <label class="sm:col-span-2"><span class="mb-1.5 block text-xs font-semibold text-slate-600">Deskripsi / karakteristik</span><textarea id="fish-description" class="focus-ring w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm outline-none" rows="3" maxlength="260" required></textarea></label>
-        <label class="sm:col-span-2"><span class="mb-1.5 block text-xs font-semibold text-slate-600">URL gambar</span><input id="fish-image" class="focus-ring h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none" type="url" required></label>
-        <div class="mt-2 flex justify-end gap-3 sm:col-span-2"><button class="modal-close rounded-full border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-600 transition hover:bg-slate-50" type="button">Batal</button><button id="save-fish-btn" class="rounded-full bg-[#0b2b3a] px-6 py-2.5 text-sm font-bold text-white transition hover:bg-[#16495b]" type="submit">Simpan ikan</button></div>
-      </form>
-    </div>
-  </div>
-  <div id="toast" class="pointer-events-none fixed bottom-5 left-1/2 z-[80] -translate-x-1/2 translate-y-4 rounded-full bg-[#0b2b3a] px-5 py-3 text-sm font-medium text-white opacity-0 shadow-xl transition-all" role="status" aria-live="polite"></div>
-
-  <script>
-    (() => {
-      "use strict";
-      // Konfigurasi Supabase
-      const SUPABASE_URL = "https://virdyocbxutndpollqhp.supabase.co";
-      const SUPABASE_KEY = "sb_publishable_TCEwyHRv9tUlLfGtlwOebA_W68gV71V";
-      const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-      const WHATSAPP_NUMBER = "6285121959757";
-      const fishPhoto = "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85";
-      const initialFish = [
-        { id: "blue-diamond", name: "Blue Diamond Discus", size: "M", grade: "Premium", cm: "12–15", temperament: "Tenang", price: 450000, stock: 12, description: "Biru safir solid berkilau dengan bentuk tubuh bulat dan elegan.", image: fishPhoto },
-        { id: "red-melon", name: "Red Melon Discus", size: "M", grade: "A", cm: "10–14", temperament: "Damai", price: 375000, stock: 8, description: "Merah melon cerah dan merata, menjadi titik fokus akuarium.", image: fishPhoto },
-        { id: "pigeon-blood", name: "Pigeon Blood Discus", size: "L", grade: "Premium", cm: "13–16", temperament: "Tenang", price: 550000, stock: 5, description: "Corak merah-oranye berpadu bintik putih khas yang ekspresif.", image: fishPhoto },
-        { id: "red-turquoise", name: "Turquoise Discus", size: "M", grade: "A", cm: "11–14", temperament: "Damai", price: 425000, stock: 10, description: "Garis turquoise merah dan biru membentuk pola yang memikat.", image: fishPhoto },
-        { id: "heckel-wild", name: "Heckel Discus (Wild)", size: "L", grade: "Wild", cm: "14–18", temperament: "Sensitif", price: 1250000, stock: 3, description: "Varietas wild dengan garis tengah tegas dan karakter autentik.", image: fishPhoto },
-        { id: "leopard-snake-skin", name: "Leopard Snake Skin Discus", size: "M", grade: "Premium", cm: "12–15", temperament: "Aktif", price: 700000, stock: 7, description: "Pola bintik dan garis snake skin rapat dengan warna yang kontras.", image: fishPhoto },
-        { id: "golden-sunrise", name: "Golden Sunrise / Yellow Crystal", size: "M", grade: "A", cm: "10–14", temperament: "Damai", price: 475000, stock: 0, description: "Kuning keemasan lembut yang menyala indah di bawah pencahayaan.", image: fishPhoto },
-        { id: "white-butterfly", name: "White Butterfly Discus", size: "S", grade: "A", cm: "8–11", temperament: "Tenang", price: 325000, stock: 9, description: "Warna putih bersih dengan tepian halus menyerupai sayap kupu-kupu.", image: fishPhoto },
-        { id: "cobalt-blue", name: "Cobalt Blue Discus", size: "L", grade: "Premium", cm: "13–16", temperament: "Damai", price: 650000, stock: 4, description: "Biru kobalt pekat dengan kilau metalik yang menawan.", image: fishPhoto },
-        { id: "checkerboard-pigeon", name: "Checkerboard Pigeon Discus", size: "M", grade: "A", cm: "11–14", temperament: "Aktif", price: 500000, stock: 6, description: "Motif checkerboard merah cerah dengan pola simetris yang unik.", image: fishPhoto }
-      ];
-
-      const $ = (selector) => document.querySelector(selector);
-      const grid = $("#catalog-grid");
-      const adminPanel = $("#admin-panel");
-      const loginModal = $("#login-modal");
-      const fishModal = $("#fish-modal");
-      let fish = [];
-      let toastTimer;
-
-      // Mengonversi baris dari kolom database Supabase ke objek aplikasi
-      function mapRowToFish(row) {
-        return {
-          id: String(row.id ?? `fish-${Math.random().toString(36).slice(2, 7)}`),
-          name: row.nama || "Discus Tanpa Nama",
-          price: Number(row.harga) || 0,
-          stock: Number(row.stock) || 0,
-          image: row.foto_url || fishPhoto,
-          size: row.size || "M",
-          grade: row.grade || "A",
-          cm: row.cm || "10–14",
-          temperament: row.temperament || "Damai",
-          description: row.description || "Discus pilihan sehat dan terawat."
-        };
-      }
-
-      // Mengonversi objek aplikasi ke nama kolom tabel 'fish' di Supabase
-      function mapFishToRow(item) {
-        return {
-          id: item.id,
-          nama: item.name,
-          harga: item.price,
-          stock: String(item.stock),
-          foto_url: item.image,
-          size: item.size,
-          grade: item.grade,
-          cm: item.cm,
-          temperament: item.temperament,
-          description: item.description
-        };
-      }
-
-      async function fetchFishFromSupabase() {
-        const { data, error } = await db.from("fish").select("*");
-        if (error) {
-          console.error("Gagal mengambil data dari Supabase:", error);
-          $("#catalog-count").textContent = "Gagal memuat data dari server.";
-          return;
-        }
-        // Jika tabel Supabase masih kosong, otomatis isi dengan 10 data awal
-        if (!data || data.length === 0) {
-          const rows = initialFish.map(mapFishToRow);
-          const { error: insertError } = await db.from("fish").insert(rows);
-          if (!insertError) {
-            fish = structuredClone(initialFish);
-          } else {
-            console.error("Gagal mengisi data awal:", insertError);
-            fish = [];
-          }
-        } else {
-          fish = data.map(mapRowToFish);
-        }
-        renderAll();
-      }
-
-      function escapeHtml(value) {
-        return String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
-      }
-      function formatRupiah(value) {
-        return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(value);
-      }
-      function whatsappLink(item) {
-        const message = `Halo Blessed Discus Indonesia, saya tertarik dengan ${item.name} (${formatRupiah(item.price)}). Apakah stok masih tersedia?`;
-        return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`; }  function renderCatalog() { const query = $("#search-input").value.trim().toLocaleLowerCase("id"); const category = $("#category-filter").value; const filtered = fish.filter((item) => { const matchesQuery = item.name.toLocaleLowerCase("id").includes(query); const matchesCategory = category === "all" \vert{}\vert{} item.size === category \vert{}\vert{} item.grade === category; return matchesQuery && matchesCategory; }); $("#catalog-count").textContent = `${filtered.length} koleksi ditampilkan`;
-        $("#empty-results").classList.toggle("hidden", filtered.length !== 0);
-        grid.classList.toggle("hidden", filtered.length === 0);
-        grid.innerHTML = filtered.map((item) => `
-          <article class="fish-card overflow-hidden rounded-2xl border border-slate-100 bg-white">
-            <div class="relative h-56 overflow-hidden bg-gradient-to-br from-[#dce9e7] to-[#a7c7c7]">
-              <img class="fish-image h-full w-full object-cover" src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}" loading="lazy" onerror="this.style.display='none'">
-              <span class="absolute left-4 top-4 rounded-full border border-white/70 bg-white/85 px-3 py-1 text-[10px] font-semibold text-[#214653] backdrop-blur">${escapeHtml(item.grade)} ·${escapeHtml(item.size)}</span>
-              <span class="absolute right-4 top-4 rounded-full px-3 py-1 text-[10px] font-semibold ${item.stock > 0 ? "bg-[#e7f2eb] text-[#38704c]" : "bg-red-100 text-red-700"}">${item.stock > 0 ? `Stok: ${item.stock} ekor` : "Habis"}</span>
-              <span class="absolute bottom-3 left-4 rounded-full bg-[#092333]/65 px-3 py-1 text-[10px] text-white backdrop
+  <!-- Modal Form Ikan -->
+  <div id="fish-modal" class="modal-backdrop fixed inset-0 z-[110] hidden items-center justify-center overflow-y-auto p-4" role="dialog" aria-modal="true" aria-labelledby="fish-modal-title">
+    <div class="my-auto w-
