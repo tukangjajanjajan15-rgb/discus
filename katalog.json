@@ -98,14 +98,14 @@
   {
     "id": "cobalt-blue",
     "name": "Cobalt Blue Discus",
-    "size": "L",
-    "grade": "Premium",
-    "cm": "13–16",
-    "temperament": "Damai",
     "price": 650000,
     "stock": 4,
+    "size": "L",
+    "grade": "Premium",
     "description": "Biru kobalt pekat dengan kilau metalik yang menawan.",
-    "image": "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85"
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvVm4wvDCFHoSHkROvnZCrHBEoYCtRx4KZFikLB-f7s_pT4EztYuIM2smD&s=10",
+    "cm": "13–16",
+    "temperament": "Damai"
   },
   {
     "id": "checkerboard-pigeon",
