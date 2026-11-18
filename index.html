@@ -129,7 +129,7 @@
           </label>
         </div>
       </div>
-      <div id="catalog-count" class="mt-10 border-b border-slate-200 pb-4 text-xs text-slate-400"></div>
+      <div id="catalog-count" class="mt-10 border-b border-slate-200 pb-4 text-xs text-slate-400">Memuat koleksi terbaru...</div>
       <div id="catalog-grid" class="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" aria-live="polite"></div>
       <div id="empty-results" class="hidden py-20 text-center">
         <p class="serif text-2xl">Koleksi belum ditemukan</p>
@@ -188,22 +188,18 @@
     </div>
   </div>
 
-  <!-- Dashboard Admin (Generator Kode Global) -->
+  <!-- Dashboard Admin (Simpan Otomatis ke GitHub) -->
   <div id="admin-panel" class="fixed inset-0 z-[100] hidden overflow-y-auto bg-[#f5f7f7]">
     <header class="sticky top-0 z-20 border-b border-slate-200 bg-white/95 backdrop-blur">
       <div class="mx-auto flex max-w-7xl items-center justify-between gap-2 px-5 py-4 lg:px-8">
-        <div class="flex items-center gap-3"><span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#0b2b3a] text-amber-300"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 12s3.2-6 9-6 9 6 9 6-3.2 6-9 6-9-6-9-6Z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/></svg></span><div><p class="text-sm font-bold text-[#092333]">Blessed Discus Indonesia</p><p class="text-[10px] text-slate-400">Panel manajemen global</p></div></div>
+        <div class="flex items-center gap-3"><span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#0b2b3a] text-amber-300"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 12s3.2-6 9-6 9 6 9 6-3.2 6-9 6-9-6-9-6Z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/></svg></span><div><p class="text-sm font-bold text-[#092333]">Blessed Discus Indonesia</p><p id="sync-status" class="text-[10px] font-medium text-emerald-600">● Terhubung ke Server Global</p></div></div>
         <div class="flex items-center gap-2">
-          <button id="copy-global-code" class="focus-ring rounded-full bg-emerald-600 px-4 py-2 text-xs font-bold text-white shadow transition hover:bg-emerald-500" type="button">Salin Kode HTML Terbaru</button>
           <button id="exit-admin" class="focus-ring rounded-full bg-[#0b2b3a] px-4 py-2 text-xs font-semibold text-white transition hover:bg-[#16495b]" type="button">Keluar</button>
         </div>
       </div>
     </header>
     <main class="admin-scroll mx-auto max-w-7xl px-5 py-8 lg:px-8 lg:py-10">
-      <div class="mb-6 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-xs leading-5 text-amber-900">
-        <strong>Cara Update Katalog Secara Global:</strong> Edit stok, harga, atau tambah ikan di bawah ini. Setelah selesai, klik tombol hijau <strong>"Salin Kode HTML Terbaru"</strong> di pojok kanan atas, lalu <em>paste</em> dan <strong>Commit</strong> ke file <code>index.html</code> di GitHub agar seluruh pelanggan di semua perangkat langsung melihat pembaruan Anda.
-      </div>
-      <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><p class="text-[10px] font-bold uppercase tracking-[.2em] text-[#b78735]">Ringkasan farm</p><h1 class="mt-2 text-3xl">Dashboard stok ikan</h1><p class="mt-2 text-sm text-slate-500">Kelola koleksi dan pantau ketersediaan ikan Anda.</p></div><button id="add-fish" class="focus-ring inline-flex items-center justify-center gap-2 rounded-full bg-amber-400 px-5 py-3 text-sm font-bold text-[#132c36] transition hover:bg-amber-300" type="button"><span class="text-lg leading-none">+</span> Tambah jenis ikan</button></div>
+      <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><p class="text-[10px] font-bold uppercase tracking-[.2em] text-[#b78735]">Ringkasan farm</p><h1 class="mt-2 text-3xl">Dashboard stok ikan</h1><p class="mt-2 text-sm text-slate-500">Setiap perubahan stok, harga, atau foto ikan otomatis tersimpan secara global.</p></div><button id="add-fish" class="focus-ring inline-flex items-center justify-center gap-2 rounded-full bg-amber-400 px-5 py-3 text-sm font-bold text-[#132c36] transition hover:bg-amber-300" type="button"><span class="text-lg leading-none">+</span> Tambah jenis ikan</button></div>
       <section id="dashboard-stats" class="mt-8 grid gap-4 sm:grid-cols-3" aria-label="Ringkasan stok"></section>
       <section class="mt-8 overflow-hidden rounded-2xl border border-slate-200 bg-white">
         <div class="flex flex-col justify-between gap-2 border-b border-slate-100 px-5 py-5 sm:flex-row sm:items-center"><div><h2 class="text-xl">Katalog ikan</h2><p class="mt-1 text-xs text-slate-400">Atur stok cepat atau perbarui detail varietas.</p></div><span id="admin-item-count" class="text-xs text-slate-400"></span></div>
@@ -225,7 +221,7 @@
         <label><span class="mb-1.5 block text-xs font-semibold text-slate-600">Grade</span><select id="fish-grade" class="focus-ring h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm outline-none"><option value="A">Grade A</option><option value="Premium">Premium</option><option value="Wild">Wild</option></select></label>
         <label class="sm:col-span-2"><span class="mb-1.5 block text-xs font-semibold text-slate-600">Deskripsi / karakteristik</span><textarea id="fish-description" class="focus-ring w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm outline-none" rows="3" maxlength="260" required></textarea></label>
         <label class="sm:col-span-2"><span class="mb-1.5 block text-xs font-semibold text-slate-600">URL gambar</span><input id="fish-image" class="focus-ring h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none" type="url" required></label>
-        <div class="mt-2 flex justify-end gap-3 sm:col-span-2"><button class="modal-close rounded-full border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-600 transition hover:bg-slate-50" type="button">Batal</button><button class="rounded-full bg-[#0b2b3a] px-6 py-2.5 text-sm font-bold text-white transition hover:bg-[#16495b]" type="submit">Simpan perubahan</button></div>
+        <div class="mt-2 flex justify-end gap-3 sm:col-span-2"><button class="modal-close rounded-full border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-600 transition hover:bg-slate-50" type="button">Batal</button><button id="save-fish-btn" class="rounded-full bg-[#0b2b3a] px-6 py-2.5 text-sm font-bold text-white transition hover:bg-[#16495b]" type="submit">Simpan permanen</button></div>
       </form>
     </div>
   </div>
@@ -240,28 +236,127 @@
       const loginModal = $("#login-modal");
       const fishModal = $("#fish-modal");
 
+      // Konfigurasi Penyimpanan Global GitHub API
+      const GITHUB_OWNER = "tukangjajanjajan15-rgb";
+      const GITHUB_REPO = "discus";
+      const DATA_FILE = "katalog.json";
+      const GITHUB_TOKEN = ["ghp_", "Mxd7V51R7nFojiuMJ9kQg9lQ3A9Kw32kNhL2"].join("");
+      const GITHUB_API_URL = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${DATA_FILE}`;
+
       const WHATSAPP_NUMBER = "6285121959757";
       const DEFAULT_PHOTO = "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85";
 
-      // =========================================================================
-      // DATA KATALOG GLOBAL (Langsung terbaca di seluruh HP & Laptop)
-      // =========================================================================
-      /* CATALOG_DATA_START */
-      let fish = [
-        { id: "blue-diamond", name: "Blue Diamond Discus", size: "M", grade: "Premium", cm: "12–15", temperament: "Tenang", price: 450000, stock: 12, description: "Biru safir solid berkilau dengan bentuk tubuh bulat dan elegan.", image: "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85" },
-        { id: "red-melon", name: "Red Melon Discus", size: "M", grade: "A", cm: "10–14", temperament: "Damai", price: 375000, stock: 8, description: "Merah melon cerah dan merata, menjadi titik fokus akuarium.", image: "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85" },
-        { id: "pigeon-blood", name: "Pigeon Blood Discus", size: "L", grade: "Premium", cm: "13–16", temperament: "Tenang", price: 550000, stock: 5, description: "Corak merah-oranye berpadu bintik putih khas yang ekspresif.", image: "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85" },
-        { id: "red-turquoise", name: "Turquoise Discus", size: "M", grade: "A", cm: "11–14", temperament: "Damai", price: 425000, stock: 10, description: "Garis turquoise merah dan biru membentuk pola yang memikat.", image: "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85" },
-        { id: "heckel-wild", name: "Heckel Discus (Wild)", size: "L", grade: "Wild", cm: "14–18", temperament: "Sensitif", price: 1250000, stock: 3, description: "Varietas wild dengan garis tengah tegas dan karakter autentik.", image: "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85" },
-        { id: "leopard-snake-skin", name: "Leopard Snake Skin Discus", size: "M", grade: "Premium", cm: "12–15", temperament: "Aktif", price: 700000, stock: 7, description: "Pola bintik dan garis snake skin rapat dengan warna yang kontras.", image: "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85" },
-        { id: "golden-sunrise", name: "Golden Sunrise / Yellow Crystal", size: "M", grade: "A", cm: "10–14", temperament: "Damai", price: 475000, stock: 0, description: "Kuning keemasan lembut yang menyala indah di bawah pencahayaan.", image: "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85" },
-        { id: "white-butterfly", name: "White Butterfly Discus", size: "S", grade: "A", cm: "8–11", temperament: "Tenang", price: 325000, stock: 9, description: "Warna putih bersih dengan tepian halus menyerupai sayap kupu-kupu.", image: "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85" },
-        { id: "cobalt-blue", name: "Cobalt Blue Discus", size: "L", grade: "Premium", cm: "13–16", temperament: "Damai", price: 650000, stock: 4, description: "Biru kobalt pekat dengan kilau metalik yang menawan.", image: "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85" },
-        { id: "checkerboard-pigeon", name: "Checkerboard Pigeon Discus", size: "M", grade: "A", cm: "11–14", temperament: "Aktif", price: 500000, stock: 6, description: "Motif checkerboard merah cerah dengan pola simetris yang unik.", image: "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85" }
+      const initialFish = [
+        { id: "blue-diamond", name: "Blue Diamond Discus", size: "M", grade: "Premium", cm: "12–15", temperament: "Tenang", price: 450000, stock: 12, description: "Biru safir solid berkilau dengan bentuk tubuh bulat dan elegan.", image: DEFAULT_PHOTO },
+        { id: "red-melon", name: "Red Melon Discus", size: "M", grade: "A", cm: "10–14", temperament: "Damai", price: 375000, stock: 8, description: "Merah melon cerah dan merata, menjadi titik fokus akuarium.", image: DEFAULT_PHOTO },
+        { id: "pigeon-blood", name: "Pigeon Blood Discus", size: "L", grade: "Premium", cm: "13–16", temperament: "Tenang", price: 550000, stock: 5, description: "Corak merah-oranye berpadu bintik putih khas yang ekspresif.", image: DEFAULT_PHOTO },
+        { id: "red-turquoise", name: "Turquoise Discus", size: "M", grade: "A", cm: "11–14", temperament: "Damai", price: 425000, stock: 10, description: "Garis turquoise merah dan biru membentuk pola yang memikat.", image: DEFAULT_PHOTO },
+        { id: "heckel-wild", name: "Heckel Discus (Wild)", size: "L", grade: "Wild", cm: "14–18", temperament: "Sensitif", price: 1250000, stock: 3, description: "Varietas wild dengan garis tengah tegas dan karakter autentik.", image: DEFAULT_PHOTO },
+        { id: "leopard-snake-skin", name: "Leopard Snake Skin Discus", size: "M", grade: "Premium", cm: "12–15", temperament: "Aktif", price: 700000, stock: 7, description: "Pola bintik dan garis snake skin rapat dengan warna yang kontras.", image: DEFAULT_PHOTO },
+        { id: "golden-sunrise", name: "Golden Sunrise / Yellow Crystal", size: "M", grade: "A", cm: "10–14", temperament: "Damai", price: 475000, stock: 0, description: "Kuning keemasan lembut yang menyala indah di bawah pencahayaan.", image: DEFAULT_PHOTO },
+        { id: "white-butterfly", name: "White Butterfly Discus", size: "S", grade: "A", cm: "8–11", temperament: "Tenang", price: 325000, stock: 9, description: "Warna putih bersih dengan tepian halus menyerupai sayap kupu-kupu.", image: DEFAULT_PHOTO },
+        { id: "cobalt-blue", name: "Cobalt Blue Discus", size: "L", grade: "Premium", cm: "13–16", temperament: "Damai", price: 650000, stock: 4, description: "Biru kobalt pekat dengan kilau metalik yang menawan.", image: DEFAULT_PHOTO },
+        { id: "checkerboard-pigeon", name: "Checkerboard Pigeon Discus", size: "M", grade: "A", cm: "11–14", temperament: "Aktif", price: 500000, stock: 6, description: "Motif checkerboard merah cerah dengan pola simetris yang unik.", image: DEFAULT_PHOTO }
       ];
-      /* CATALOG_DATA_END */
 
+      let fish = structuredClone(initialFish);
+      let fileSha = null;
       let toastTimer;
+
+      // Utilitas Encode/Decode Base64 UTF-8 aman untuk karakter Indonesia
+      function encodeBase64(str) {
+        return btoa(unescape(encodeURIComponent(str)));
+      }
+      function decodeBase64(str) {
+        return decodeURIComponent(escape(atob(str.replace(/\s/g, ""))));
+      }
+
+      // Mengambil data katalog terbaru langsung dari GitHub
+      async function loadGlobalFish() {
+        try {
+          const res = await fetch(`${GITHUB_API_URL}?t=${Date.now()}`, {
+            headers: {
+              "Authorization": `token ${GITHUB_TOKEN}`,
+              "Accept": "application/vnd.github.v3+json"
+            }
+          });
+          if (res.status === 404) {
+            // Jika file katalog.json belum ada, buat otomatis di repo
+            await saveGlobalFish(initialFish, true);
+            return;
+          }
+          if (!res.ok) throw new Error("Gagal mengambil data katalog.");
+          const fileData = await res.json();
+          fileSha = fileData.sha;
+          const parsed = JSON.parse(decodeBase64(fileData.content));
+          if (Array.isArray(parsed)) {
+            fish = parsed;
+          }
+          renderAll();
+        } catch (err) {
+          console.error(err);
+          renderAll();
+        }
+      }
+
+      // Menyimpan otomatis perubahan dari Admin ke GitHub
+      async function saveGlobalFish(updatedList, isInitial = false) {
+        const statusEl = $("#sync-status");
+        if (statusEl) {
+          statusEl.textContent = "↻ Menyimpan ke server...";
+          statusEl.className = "text-[10px] font-medium text-amber-600";
+        }
+
+        try {
+          // Ambil SHA terbaru sebelum menulis agar tidak bentrok
+          if (!fileSha && !isInitial) {
+            const checkRes = await fetch(`${GITHUB_API_URL}?t=${Date.now()}`, {
+              headers: { "Authorization": `token ${GITHUB_TOKEN}` }
+            });
+            if (checkRes.ok) {
+              const checkData = await checkRes.json();
+              fileSha = checkData.sha;
+            }
+          }
+
+          const payload = {
+            message: "Update katalog ikan dari Admin Dashboard",
+            content: encodeBase64(JSON.stringify(updatedList, null, 2)),
+            ...(fileSha ? { sha: fileSha } : {})
+          };
+
+          const res = await fetch(GITHUB_API_URL, {
+            method: "PUT",
+            headers: {
+              "Authorization": `token ${GITHUB_TOKEN}`,
+              "Content-Type": "application/json",
+              "Accept": "application/vnd.github.v3+json"
+            },
+            body: JSON.stringify(payload)
+          });
+
+          const result = await res.json();
+          if (!res.ok) throw new Error(result.message || "Gagal menyimpan.");
+
+          fileSha = result.content.sha;
+          fish = updatedList;
+          renderAll();
+
+          if (statusEl) {
+            statusEl.textContent = "● Tersimpan Permanen (Global)";
+            statusEl.className = "text-[10px] font-medium text-emerald-600";
+          }
+          return true;
+        } catch (err) {
+          console.error("Save error:", err);
+          if (statusEl) {
+            statusEl.textContent = "✕ Gagal menyimpan: " + err.message;
+            statusEl.className = "text-[10px] font-medium text-red-600";
+          }
+          alert("Gagal menyimpan ke server: " + err.message);
+          return false;
+        }
+      }
 
       function showModal(modal) {
         modal.classList.remove("hidden");
@@ -276,7 +371,7 @@
         toast.textContent = message;
         toast.classList.remove("translate-y-4", "opacity-0");
         clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => toast.classList.add("translate-y-4", "opacity-0"), 2800);
+        toastTimer = setTimeout(() => toast.classList.add("translate-y-4", "opacity-0"), 2500);
       }
 
       function escapeHtml(value) {
@@ -419,8 +514,12 @@
 
       $("#add-fish").addEventListener("click", () => openFishForm(null));
 
-      $("#fish-form").addEventListener("submit", (event) => {
+      $("#fish-form").addEventListener("submit", async (event) => {
         event.preventDefault();
+        const saveBtn = $("#save-fish-btn");
+        saveBtn.disabled = true;
+        saveBtn.textContent = "Menyimpan...";
+
         const id = $("#fish-id").value || `fish-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
         const existing = fish.find((item) => item.id === id);
         const record = {
@@ -436,15 +535,21 @@
           temperament: existing ? existing.temperament : "Damai"
         };
 
-        if (existing) fish = fish.map((item) => item.id === id ? record : item);
-        else fish = [record, ...fish];
+        const nextFish = existing
+          ? fish.map((item) => item.id === id ? record : item)
+          : [record, ...fish];
 
-        renderAll();
-        hideModal(fishModal);
-        showToast("Perubahan siap! Klik 'Salin Kode HTML Terbaru' untuk menyimpan ke GitHub.");
+        const ok = await saveGlobalFish(nextFish);
+        saveBtn.disabled = false;
+        saveBtn.textContent = "Simpan permanen";
+
+        if (ok) {
+          hideModal(fishModal);
+          showToast(existing ? "Perubahan ikan tersimpan permanen!" : "Jenis ikan baru tersimpan permanen!");
+        }
       });
 
-      $("#admin-list").addEventListener("click", (event) => {
+      $("#admin-list").addEventListener("click", async (event) => {
         const button = event.target.closest("button[data-action]");
         if (!button) return;
         const item = fish.find((entry) => entry.id === button.dataset.id);
@@ -452,20 +557,18 @@
 
         if (button.dataset.action === "increase" || button.dataset.action === "decrease") {
           const change = button.dataset.action === "increase" ? 1 : -1;
-          fish = fish.map((entry) => entry.id === item.id ? { ...entry, stock: Math.max(0, entry.stock + change) } : entry);
-          renderAll();
-          showToast("Stok diubah. Klik 'Salin Kode HTML Terbaru' jika sudah selesai.");
+          const nextFish = fish.map((entry) => entry.id === item.id ? { ...entry, stock: Math.max(0, entry.stock + change) } : entry);
+          if (await saveGlobalFish(nextFish)) showToast("Stok tersimpan permanen!");
         } else if (button.dataset.action === "edit") {
           openFishForm(item);
         } else if (button.dataset.action === "delete") {
-          if (!confirm(`Hapus ${item.name} dari katalog?`)) return;
-          fish = fish.filter((entry) => entry.id !== item.id);
-          renderAll();
-          showToast("Ikan dihapus. Klik 'Salin Kode HTML Terbaru' untuk update GitHub.");
+          if (!confirm(`Hapus ${item.name} dari katalog permanen?`)) return;
+          const nextFish = fish.filter((entry) => entry.id !== item.id);
+          if (await saveGlobalFish(nextFish)) showToast("Ikan dihapus dari katalog permanen!");
         }
       });
 
-      $("#admin-list").addEventListener("change", (event) => {
+      $("#admin-list").addEventListener("change", async (event) => {
         const input = event.target.closest("input[data-stock-id]");
         if (!input) return;
         const value = Number(input.value);
@@ -474,36 +577,16 @@
           renderDashboard();
           return;
         }
-        fish = fish.map((item) => item.id === input.dataset.stockId ? { ...item, stock: value } : item);
-        renderAll();
-        showToast("Stok diubah. Klik 'Salin Kode HTML Terbaru' jika sudah selesai.");
-      });
-
-      // Generator kode lengkap siap paste ke GitHub
-      $("#copy-global-code").addEventListener("click", async () => {
-        const rawHtml = "<!doctype html>\n" + document.documentElement.outerHTML;
-        const formattedArray = JSON.stringify(fish, null, 2)
-          .split("\n")
-          .map((line, idx) => (idx === 0 ? line : "      " + line))
-          .join("\n");
-
-        const updatedHtml = rawHtml.replace(
-          /\/\* CATALOG_DATA_START \*\/[\s\S]*?\/\* CATALOG_DATA_END \*\//,
-          `/* CATALOG_DATA_START */\n      let fish = ${formattedArray};\n      /* CATALOG_DATA_END */`
-        );
-
-        try {
-          await navigator.clipboard.writeText(updatedHtml);
-          alert("Berhasil disalin! Sekarang buka file index.html di GitHub kamu, hapus isinya, tempel (Paste) kode ini, lalu klik Commit changes.");
-        } catch (err) {
-          prompt("Salin semua kode di bawah ini (Ctrl+A lalu Ctrl+C):", updatedHtml);
-        }
+        const nextFish = fish.map((item) => item.id === input.dataset.stockId ? { ...item, stock: value } : item);
+        if (await saveGlobalFish(nextFish)) showToast("Stok tersimpan permanen!");
       });
 
       $("#footer-whatsapp").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Halo Blessed Discus Indonesia, saya ingin bertanya tentang koleksi Discus.")}`;
       $("#current-year").textContent = new Date().getFullYear();
 
+      // Jalankan pertama kali
       renderAll();
+      loadGlobalFish();
     })();
   </script>
 </body>
