@@ -38,14 +38,14 @@
   {
     "id": "red-turquoise",
     "name": "Turquoise Discus",
-    "size": "M",
-    "grade": "A",
-    "cm": "11–14",
-    "temperament": "Damai",
     "price": 425000,
     "stock": 10,
+    "size": "M",
+    "grade": "A",
     "description": "Garis turquoise merah dan biru membentuk pola yang memikat.",
-    "image": "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85"
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUBeV8HdksHaQkFcXWxWEPCaUMq19h6Qm7bNcDiMSzBoscc8_dFYbNS-o&s=10",
+    "cm": "11–14",
+    "temperament": "Damai"
   },
   {
     "id": "heckel-wild",
