@@ -26,14 +26,14 @@
   {
     "id": "pigeon-blood",
     "name": "Pigeon Blood Discus",
-    "size": "L",
-    "grade": "Premium",
-    "cm": "13–16",
-    "temperament": "Tenang",
     "price": 550000,
     "stock": 5,
+    "size": "L",
+    "grade": "Premium",
     "description": "Corak merah-oranye berpadu bintik putih khas yang ekspresif.",
-    "image": "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85"
+    "image": "https://tropicflow.com/cdn/shop/files/red-pigeon-blood-discus-fish-1.jpg?v=1771630873&width=1445",
+    "cm": "13–16",
+    "temperament": "Tenang"
   },
   {
     "id": "red-turquoise",
