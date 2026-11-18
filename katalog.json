@@ -86,14 +86,14 @@
   {
     "id": "white-butterfly",
     "name": "White Butterfly Discus",
-    "size": "S",
-    "grade": "A",
-    "cm": "8–11",
-    "temperament": "Tenang",
     "price": 325000,
     "stock": 9,
+    "size": "S",
+    "grade": "A",
     "description": "Warna putih bersih dengan tepian halus menyerupai sayap kupu-kupu.",
-    "image": "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85"
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfLJMmRaY_4N4RGEvMBIIcaVdN-9lqMTNsjRdz33hGmdu9fD72LENQoj57&s=10",
+    "cm": "8–11",
+    "temperament": "Tenang"
   },
   {
     "id": "cobalt-blue",
