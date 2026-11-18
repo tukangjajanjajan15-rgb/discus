@@ -2,14 +2,14 @@
   {
     "id": "blue-diamond",
     "name": "Blue Diamond Discus",
+    "price": 4500000,
+    "stock": 12,
     "size": "M",
     "grade": "Premium",
-    "cm": "12–15",
-    "temperament": "Tenang",
-    "price": 450000,
-    "stock": 12,
     "description": "Biru safir solid berkilau dengan bentuk tubuh bulat dan elegan.",
-    "image": "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85"
+    "image": "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85",
+    "cm": "12–15",
+    "temperament": "Tenang"
   },
   {
     "id": "red-melon",
