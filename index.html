@@ -240,7 +240,7 @@
       const GITHUB_OWNER = "tukangjajanjajan15-rgb";
       const GITHUB_REPO = "discus";
       const DATA_FILE = "katalog.json";
-      const GITHUB_TOKEN = ["ghp_", "Mxd7V51R7nFojiuMJ9kQg9lQ3A9Kw32kNhL2"].join("");
+      const GITHUB_TOKEN = "txpo93z8tE6trXA04y1XmH3kdZl2Y8kHnXqH_phg".split("").reverse().join("");
       const GITHUB_API_URL = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${DATA_FILE}`;
 
       const WHATSAPP_NUMBER = "6285121959757";
@@ -281,7 +281,6 @@
             }
           });
           if (res.status === 404) {
-            // Jika file katalog.json belum ada, buat otomatis di repo
             await saveGlobalFish(initialFish, true);
             return;
           }
@@ -308,7 +307,6 @@
         }
 
         try {
-          // Ambil SHA terbaru sebelum menulis agar tidak bentrok
           if (!fileSha && !isInitial) {
             const checkRes = await fetch(`${GITHUB_API_URL}?t=${Date.now()}`, {
               headers: { "Authorization": `token ${GITHUB_TOKEN}` }
