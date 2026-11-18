@@ -1,5 +1,17 @@
 [
   {
+    "id": "fish-1794992992126-s8mys",
+    "name": "yellow pigeon",
+    "price": 800000,
+    "stock": 3,
+    "size": "M",
+    "grade": "A",
+    "description": "a",
+    "image": "https://simstropicalfish.co.uk/wp-content/uploads/2023/10/Yellow-Pigeon-Checkerboard-Discus-2.png",
+    "cm": "10–14",
+    "temperament": "Damai"
+  },
+  {
     "id": "fish-1794988065059-v1olf",
     "name": "San Merah (blue rim) Red cover",
     "price": 950000,
