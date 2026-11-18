@@ -62,14 +62,14 @@
   {
     "id": "leopard-snake-skin",
     "name": "Leopard Snake Skin Discus",
-    "size": "M",
-    "grade": "Premium",
-    "cm": "12–15",
-    "temperament": "Aktif",
     "price": 700000,
     "stock": 7,
+    "size": "M",
+    "grade": "Premium",
     "description": "Pola bintik dan garis snake skin rapat dengan warna yang kontras.",
-    "image": "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85"
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlz4CKJ7ouCm-7faspPC-1MbZCVOcQ_0txUsTrLLPkxQ&s=10",
+    "cm": "12–15",
+    "temperament": "Aktif"
   },
   {
     "id": "golden-sunrise",
