@@ -110,13 +110,13 @@
   {
     "id": "checkerboard-pigeon",
     "name": "Checkerboard Pigeon Discus",
-    "size": "M",
-    "grade": "A",
-    "cm": "11–14",
-    "temperament": "Aktif",
     "price": 500000,
     "stock": 6,
+    "size": "M",
+    "grade": "A",
     "description": "Motif checkerboard merah cerah dengan pola simetris yang unik.",
-    "image": "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85"
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUtn2DHeK1EQFd6o3If6h943LAcV_mV_zzQeIUNegnbr-pvW4k59jiH-M&s=10",
+    "cm": "11–14",
+    "temperament": "Aktif"
   }
 ]
