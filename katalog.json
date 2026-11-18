@@ -1,0 +1,122 @@
+[
+  {
+    "id": "blue-diamond",
+    "name": "Blue Diamond Discus",
+    "size": "M",
+    "grade": "Premium",
+    "cm": "12–15",
+    "temperament": "Tenang",
+    "price": 450000,
+    "stock": 12,
+    "description": "Biru safir solid berkilau dengan bentuk tubuh bulat dan elegan.",
+    "image": "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85"
+  },
+  {
+    "id": "red-melon",
+    "name": "Red Melon Discus",
+    "size": "M",
+    "grade": "A",
+    "cm": "10–14",
+    "temperament": "Damai",
+    "price": 375000,
+    "stock": 8,
+    "description": "Merah melon cerah dan merata, menjadi titik fokus akuarium.",
+    "image": "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85"
+  },
+  {
+    "id": "pigeon-blood",
+    "name": "Pigeon Blood Discus",
+    "size": "L",
+    "grade": "Premium",
+    "cm": "13–16",
+    "temperament": "Tenang",
+    "price": 550000,
+    "stock": 5,
+    "description": "Corak merah-oranye berpadu bintik putih khas yang ekspresif.",
+    "image": "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85"
+  },
+  {
+    "id": "red-turquoise",
+    "name": "Turquoise Discus",
+    "size": "M",
+    "grade": "A",
+    "cm": "11–14",
+    "temperament": "Damai",
+    "price": 425000,
+    "stock": 10,
+    "description": "Garis turquoise merah dan biru membentuk pola yang memikat.",
+    "image": "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85"
+  },
+  {
+    "id": "heckel-wild",
+    "name": "Heckel Discus (Wild)",
+    "size": "L",
+    "grade": "Wild",
+    "cm": "14–18",
+    "temperament": "Sensitif",
+    "price": 1250000,
+    "stock": 3,
+    "description": "Varietas wild dengan garis tengah tegas dan karakter autentik.",
+    "image": "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85"
+  },
+  {
+    "id": "leopard-snake-skin",
+    "name": "Leopard Snake Skin Discus",
+    "size": "M",
+    "grade": "Premium",
+    "cm": "12–15",
+    "temperament": "Aktif",
+    "price": 700000,
+    "stock": 7,
+    "description": "Pola bintik dan garis snake skin rapat dengan warna yang kontras.",
+    "image": "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85"
+  },
+  {
+    "id": "golden-sunrise",
+    "name": "Golden Sunrise / Yellow Crystal",
+    "size": "M",
+    "grade": "A",
+    "cm": "10–14",
+    "temperament": "Damai",
+    "price": 475000,
+    "stock": 0,
+    "description": "Kuning keemasan lembut yang menyala indah di bawah pencahayaan.",
+    "image": "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85"
+  },
+  {
+    "id": "white-butterfly",
+    "name": "White Butterfly Discus",
+    "size": "S",
+    "grade": "A",
+    "cm": "8–11",
+    "temperament": "Tenang",
+    "price": 325000,
+    "stock": 9,
+    "description": "Warna putih bersih dengan tepian halus menyerupai sayap kupu-kupu.",
+    "image": "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85"
+  },
+  {
+    "id": "cobalt-blue",
+    "name": "Cobalt Blue Discus",
+    "size": "L",
+    "grade": "Premium",
+    "cm": "13–16",
+    "temperament": "Damai",
+    "price": 650000,
+    "stock": 4,
+    "description": "Biru kobalt pekat dengan kilau metalik yang menawan.",
+    "image": "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85"
+  },
+  {
+    "id": "checkerboard-pigeon",
+    "name": "Checkerboard Pigeon Discus",
+    "size": "M",
+    "grade": "A",
+    "cm": "11–14",
+    "temperament": "Aktif",
+    "price": 500000,
+    "stock": 6,
+    "description": "Motif checkerboard merah cerah dengan pola simetris yang unik.",
+    "image": "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85"
+  }
+]
