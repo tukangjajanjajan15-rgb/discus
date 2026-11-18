@@ -7,6 +7,7 @@
   <meta name="description" content="Discus pilihan dengan kualitas premium dari Blessed Discus Indonesia.">
   <title>Blessed Discus Indonesia — Keindahan yang Hidup</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
@@ -134,7 +135,7 @@
           </label>
         </div>
       </div>
-      <div id="catalog-count" class="mt-10 border-b border-slate-200 pb-4 text-xs text-slate-400"></div>
+      <div id="catalog-count" class="mt-10 border-b border-slate-200 pb-4 text-xs text-slate-400">Memuat koleksi dari server...</div>
       <div id="catalog-grid" class="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" aria-live="polite"></div>
       <div id="empty-results" class="hidden py-20 text-center">
         <p class="serif text-2xl">Koleksi belum ditemukan</p>
@@ -189,7 +190,6 @@
         <p id="login-error" class="mt-2 hidden text-xs text-red-600" role="alert">PIN tidak sesuai. Silakan coba lagi.</p>
         <button class="mt-5 h-12 w-full rounded-xl bg-[#0b2b3a] text-sm font-bold text-white transition hover:bg-[#16495b]" type="submit">Masuk ke Dashboard</button>
       </form>
-    
     </div>
   </div>
 
@@ -198,19 +198,19 @@
       <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
         <div class="flex items-center gap-3"><span class="grid h-10 w-10 place-items-center rounded-xl bg-[#0b2b3a] text-amber-300"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 12s3.2-6 9-6 9 6 9 6-3.2 6-9 6-9-6-9-6Z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/></svg></span><div><p class="text-sm font-bold text-[#092333]">Blessed Discus Indonesia</p><p class="text-[10px] text-slate-400">Panel manajemen</p></div></div>
         <div class="flex items-center gap-2">
-          <button id="reset-data" class="focus-ring rounded-full border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-600 transition hover:border-red-200 hover:text-red-600 sm:px-4" type="button">Reset ke Data Awal</button>
+          <button id="reset-data" class="focus-ring rounded-full border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-600 transition hover:border-red-200 hover:text-red-600 sm:px-4" type="button">Isi 10 Data Awal</button>
           <button id="exit-admin" class="focus-ring rounded-full bg-[#0b2b3a] px-4 py-2 text-xs font-semibold text-white transition hover:bg-[#16495b]" type="button">Keluar</button>
         </div>
       </div>
     </header>
     <main class="admin-scroll mx-auto max-w-7xl px-5 py-8 lg:px-8 lg:py-10">
-      <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><p class="text-[10px] font-bold uppercase tracking-[.2em] text-[#b78735]">Ringkasan farm</p><h1 class="mt-2 text-3xl">Dashboard stok ikan</h1><p class="mt-2 text-sm text-slate-500">Kelola koleksi dan pantau ketersediaan ikan Anda.</p></div><button id="add-fish" class="focus-ring inline-flex items-center justify-center gap-2 rounded-full bg-amber-400 px-5 py-3 text-sm font-bold text-[#132c36] transition hover:bg-amber-300" type="button"><span class="text-lg leading-none">+</span> Tambah jenis ikan</button></div>
+      <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><p class="text-[10px] font-bold uppercase tracking-[.2em] text-[#b78735]">Ringkasan farm</p><h1 class="mt-2 text-3xl">Dashboard stok ikan</h1><p class="mt-2 text-sm text-slate-500">Kelola koleksi dan pantau ketersediaan ikan Anda secara real-time.</p></div><button id="add-fish" class="focus-ring inline-flex items-center justify-center gap-2 rounded-full bg-amber-400 px-5 py-3 text-sm font-bold text-[#132c36] transition hover:bg-amber-300" type="button"><span class="text-lg leading-none">+</span> Tambah jenis ikan</button></div>
       <section id="dashboard-stats" class="mt-8 grid gap-4 sm:grid-cols-3" aria-label="Ringkasan stok"></section>
       <section class="mt-8 overflow-hidden rounded-2xl border border-slate-200 bg-white">
         <div class="flex flex-col justify-between gap-2 border-b border-slate-100 px-5 py-5 sm:flex-row sm:items-center"><div><h2 class="text-xl">Katalog ikan</h2><p class="mt-1 text-xs text-slate-400">Atur stok cepat atau perbarui detail varietas.</p></div><span id="admin-item-count" class="text-xs text-slate-400"></span></div>
         <div id="admin-list" class="divide-y divide-slate-100"></div>
       </section>
-      <p class="mt-5 text-center text-[10px] text-slate-400">Data katalog tersimpan di browser ini melalui localStorage.</p>
+      <p class="mt-5 text-center text-[10px] text-slate-400">Data katalog tersinkronisasi secara online melalui Supabase Cloud Database.</p>
     </main>
   </div>
 
@@ -226,7 +226,7 @@
         <label><span class="mb-1.5 block text-xs font-semibold text-slate-600">Grade</span><select id="fish-grade" class="focus-ring h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm outline-none"><option value="A">Grade A</option><option value="Premium">Premium</option><option value="Wild">Wild</option></select></label>
         <label class="sm:col-span-2"><span class="mb-1.5 block text-xs font-semibold text-slate-600">Deskripsi / karakteristik</span><textarea id="fish-description" class="focus-ring w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm outline-none" rows="3" maxlength="260" required></textarea></label>
         <label class="sm:col-span-2"><span class="mb-1.5 block text-xs font-semibold text-slate-600">URL gambar</span><input id="fish-image" class="focus-ring h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none" type="url" required></label>
-        <div class="mt-2 flex justify-end gap-3 sm:col-span-2"><button class="modal-close rounded-full border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-600 transition hover:bg-slate-50" type="button">Batal</button><button class="rounded-full bg-[#0b2b3a] px-6 py-2.5 text-sm font-bold text-white transition hover:bg-[#16495b]" type="submit">Simpan ikan</button></div>
+        <div class="mt-2 flex justify-end gap-3 sm:col-span-2"><button class="modal-close rounded-full border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-600 transition hover:bg-slate-50" type="button">Batal</button><button id="save-fish-btn" class="rounded-full bg-[#0b2b3a] px-6 py-2.5 text-sm font-bold text-white transition hover:bg-[#16495b]" type="submit">Simpan ikan</button></div>
       </form>
     </div>
   </div>
@@ -235,7 +235,11 @@
   <script>
     (() => {
       "use strict";
-      const STORAGE_KEY = "royalDiscusCatalogV1";
+      // Konfigurasi Supabase
+      const SUPABASE_URL = "https://virdyocbxutndpollqhp.supabase.co";
+      const SUPABASE_KEY = "sb_publishable_TCEwyHRv9tUlLfGtlwOebA_W68gV71V";
+      const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
       const WHATSAPP_NUMBER = "6285121959757";
       const fishPhoto = "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85";
       const initialFish = [
@@ -256,41 +260,62 @@
       const adminPanel = $("#admin-panel");
       const loginModal = $("#login-modal");
       const fishModal = $("#fish-modal");
-      let fish = loadFish();
+      let fish = [];
       let toastTimer;
 
-      function loadFish() {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved === null) return structuredClone(initialFish);
-        try {
-          const parsed = JSON.parse(saved);
-          if (!Array.isArray(parsed) || parsed.some((item) => !isValidFish(item))) throw new Error("Format katalog tidak valid.");
-          return parsed;
-        } catch (error) {
-          console.error("Gagal membaca data katalog dari localStorage.", error);
-          alert("Data katalog tersimpan tidak dapat dibaca. Data awal dimuat kembali.");
-          localStorage.removeItem(STORAGE_KEY);
-          return structuredClone(initialFish);
+      // Mengonversi baris dari kolom database Supabase ke objek aplikasi
+      function mapRowToFish(row) {
+        return {
+          id: String(row.id ?? `fish-${Math.random().toString(36).slice(2, 7)}`),
+          name: row.nama || "Discus Tanpa Nama",
+          price: Number(row.harga) || 0,
+          stock: Number(row.stock) || 0,
+          image: row.foto_url || fishPhoto,
+          size: row.size || "M",
+          grade: row.grade || "A",
+          cm: row.cm || "10–14",
+          temperament: row.temperament || "Damai",
+          description: row.description || "Discus pilihan sehat dan terawat."
+        };
+      }
+
+      // Mengonversi objek aplikasi ke nama kolom tabel 'fish' di Supabase
+      function mapFishToRow(item) {
+        return {
+          id: item.id,
+          nama: item.name,
+          harga: item.price,
+          stock: String(item.stock),
+          foto_url: item.image,
+          size: item.size,
+          grade: item.grade,
+          cm: item.cm,
+          temperament: item.temperament,
+          description: item.description
+        };
+      }
+
+      async function fetchFishFromSupabase() {
+        const { data, error } = await db.from("fish").select("*");
+        if (error) {
+          console.error("Gagal mengambil data dari Supabase:", error);
+          $("#catalog-count").textContent = "Gagal memuat data dari server.";
+          return;
         }
-      }
-
-      function isValidFish(item) {
-        return item && typeof item.id === "string" && typeof item.name === "string" &&
-          typeof item.description === "string" && typeof item.image === "string" &&
-          Number.isFinite(item.price) && item.price >= 0 && Number.isInteger(item.stock) && item.stock >= 0 &&
-          ["S", "M", "L"].includes(item.size) && typeof item.grade === "string";
-      }
-
-      function saveFish() {
-        try {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(fish));
-        } catch (error) {
-          console.error("Gagal menyimpan katalog ke localStorage.", error);
-          alert("Perubahan tidak dapat disimpan. Periksa ruang penyimpanan browser Anda.");
-          return false;
+        // Jika tabel Supabase masih kosong, otomatis isi dengan 10 data awal
+        if (!data || data.length === 0) {
+          const rows = initialFish.map(mapFishToRow);
+          const { error: insertError } = await db.from("fish").insert(rows);
+          if (!insertError) {
+            fish = structuredClone(initialFish);
+          } else {
+            console.error("Gagal mengisi data awal:", insertError);
+            fish = [];
+          }
+        } else {
+          fish = data.map(mapRowToFish);
         }
         renderAll();
-        return true;
       }
 
       function escapeHtml(value) {
@@ -301,229 +326,13 @@
       }
       function whatsappLink(item) {
         const message = `Halo Blessed Discus Indonesia, saya tertarik dengan ${item.name} (${formatRupiah(item.price)}). Apakah stok masih tersedia?`;
-        return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-      }
-
-      function renderCatalog() {
-        const query = $("#search-input").value.trim().toLocaleLowerCase("id");
-        const category = $("#category-filter").value;
-        const filtered = fish.filter((item) => {
-          const matchesQuery = item.name.toLocaleLowerCase("id").includes(query);
-          const matchesCategory = category === "all" || item.size === category || item.grade === category;
-          return matchesQuery && matchesCategory;
-        });
-        $("#catalog-count").textContent = `${filtered.length} koleksi ditampilkan`;
+        return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`; }  function renderCatalog() { const query = $("#search-input").value.trim().toLocaleLowerCase("id"); const category = $("#category-filter").value; const filtered = fish.filter((item) => { const matchesQuery = item.name.toLocaleLowerCase("id").includes(query); const matchesCategory = category === "all" \vert{}\vert{} item.size === category \vert{}\vert{} item.grade === category; return matchesQuery && matchesCategory; }); $("#catalog-count").textContent = `${filtered.length} koleksi ditampilkan`;
         $("#empty-results").classList.toggle("hidden", filtered.length !== 0);
         grid.classList.toggle("hidden", filtered.length === 0);
         grid.innerHTML = filtered.map((item) => `
           <article class="fish-card overflow-hidden rounded-2xl border border-slate-100 bg-white">
             <div class="relative h-56 overflow-hidden bg-gradient-to-br from-[#dce9e7] to-[#a7c7c7]">
               <img class="fish-image h-full w-full object-cover" src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}" loading="lazy" onerror="this.style.display='none'">
-              <span class="absolute left-4 top-4 rounded-full border border-white/70 bg-white/85 px-3 py-1 text-[10px] font-semibold text-[#214653] backdrop-blur">${escapeHtml(item.grade)} · ${escapeHtml(item.size)}</span>
+              <span class="absolute left-4 top-4 rounded-full border border-white/70 bg-white/85 px-3 py-1 text-[10px] font-semibold text-[#214653] backdrop-blur">${escapeHtml(item.grade)} ·${escapeHtml(item.size)}</span>
               <span class="absolute right-4 top-4 rounded-full px-3 py-1 text-[10px] font-semibold ${item.stock > 0 ? "bg-[#e7f2eb] text-[#38704c]" : "bg-red-100 text-red-700"}">${item.stock > 0 ? `Stok: ${item.stock} ekor` : "Habis"}</span>
-              <span class="absolute bottom-3 left-4 rounded-full bg-[#092333]/65 px-3 py-1 text-[10px] text-white backdrop-blur">${escapeHtml(item.cm)} cm · ${escapeHtml(item.temperament)}</span>
-            </div>
-            <div class="p-5">
-              <h3 class="min-h-[3.5rem] text-xl leading-7">${escapeHtml(item.name)}</h3>
-              <p class="mt-2 min-h-[3rem] text-xs leading-5 text-slate-500">${escapeHtml(item.description)}</p>
-              <div class="mt-5 flex items-center justify-between gap-2 border-t border-slate-100 pt-4">
-                <span class="text-sm font-bold text-[#0b3445]">${formatRupiah(item.price)}</span>
-                <a href="${whatsappLink(item)}" target="_blank" rel="noopener noreferrer" class="focus-ring rounded-full bg-[#0b2b3a] px-4 py-2.5 text-[11px] font-bold text-white transition hover:bg-[#16495b]" aria-label="Pesan ${escapeHtml(item.name)} via WhatsApp">Pesan via WA ↗</a>
-              </div>
-            </div>
-          </article>`).join("");
-      }
-
-      function renderDashboard() {
-        const totalStock = fish.reduce((total, item) => total + item.stock, 0);
-        const lowStock = fish.filter((item) => item.stock <= 5).length;
-        const stats = [
-          { label: "Total jenis ikan", value: fish.length, hint: "Varietas dalam katalog", icon: "◉", tone: "text-[#287080] bg-[#edf4f3]" },
-          { label: "Total stok tersedia", value: totalStock.toLocaleString("id-ID"), hint: "Ekor siap dipilih", icon: "≈", tone: "text-[#a87827] bg-[#fbf2df]" },
-          { label: "Menipis / habis", value: lowStock, hint: "Stok 5 ekor atau kurang", icon: "!", tone: "text-[#b7463e] bg-[#fff0ed]" }
-        ];
-        $("#dashboard-stats").innerHTML = stats.map((stat) => `<article class="rounded-2xl border border-slate-200 bg-white p-5"><div class="flex items-start justify-between"><div><p class="text-xs font-medium text-slate-500">${stat.label}</p><p class="mt-3 text-3xl font-semibold text-[#092333]">${stat.value}</p><p class="mt-1 text-[10px] text-slate-400">${stat.hint}</p></div><span class="grid h-10 w-10 place-items-center rounded-xl text-lg font-bold ${stat.tone}">${stat.icon}</span></div></article>`).join("");
-        $("#admin-item-count").textContent = `${fish.length} jenis`;
-        $("#admin-list").innerHTML = fish.length ? fish.map((item) => `
-          <article class="flex flex-col gap-4 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
-            <div class="flex min-w-0 items-center gap-4">
-              <img class="h-14 w-14 shrink-0 rounded-xl bg-slate-100 object-cover" src="${escapeHtml(item.image)}" alt="" onerror="this.style.display='none'">
-              <div class="min-w-0"><h3 class="truncate text-sm font-bold text-[#092333]">${escapeHtml(item.name)}</h3><p class="mt-1 text-xs text-slate-400">${escapeHtml(item.grade)} · ${escapeHtml(item.size)} · ${formatRupiah(item.price)}</p><p class="mt-1 text-[10px] ${item.stock <= 5 ? "font-semibold text-red-600" : "text-slate-400"}">${item.stock === 0 ? "Stok habis" : `${item.stock} ekor tersedia`}</p></div>
-            </div>
-            <div class="flex items-center justify-between gap-3 sm:justify-end">
-              <div class="flex items-center rounded-full border border-slate-200">
-                <button data-action="decrease" data-id="${escapeHtml(item.id)}" class="focus-ring grid h-9 w-9 place-items-center rounded-l-full text-lg text-slate-500 transition hover:bg-slate-50 disabled:opacity-30" type="button" aria-label="Kurangi stok ${escapeHtml(item.name)}" ${item.stock === 0 ? "disabled" : ""}>−</button>
-                <input data-stock-id="${escapeHtml(item.id)}" class="w-12 border-x border-slate-200 py-2 text-center text-xs font-semibold outline-none" type="number" min="0" step="1" value="${item.stock}" aria-label="Jumlah stok ${escapeHtml(item.name)}">
-                <button data-action="increase" data-id="${escapeHtml(item.id)}" class="focus-ring grid h-9 w-9 place-items-center rounded-r-full text-lg text-slate-500 transition hover:bg-slate-50" type="button" aria-label="Tambah stok ${escapeHtml(item.name)}">+</button>
-              </div>
-              <button data-action="edit" data-id="${escapeHtml(item.id)}" class="focus-ring rounded-full border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-600 transition hover:border-[#9bbcc0] hover:text-[#145363]" type="button">Edit</button>
-              <button data-action="delete" data-id="${escapeHtml(item.id)}" class="focus-ring rounded-full px-3 py-2 text-xs font-semibold text-red-500 transition hover:bg-red-50" type="button" aria-label="Hapus ${escapeHtml(item.name)}">Hapus</button>
-            </div>
-          </article>`).join("") : `<p class="px-5 py-12 text-center text-sm text-slate-400">Belum ada jenis ikan. Tambahkan koleksi pertama Anda.</p>`;
-      }
-
-      function renderAll() {
-        renderCatalog();
-        renderDashboard();
-      }
-
-      function showToast(message) {
-        const toast = $("#toast");
-        toast.textContent = message;
-        toast.classList.remove("translate-y-4", "opacity-0");
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => toast.classList.add("translate-y-4", "opacity-0"), 2400);
-      }
-
-      function showModal(modal) {
-        modal.classList.remove("hidden");
-        modal.classList.add("flex");
-      }
-      function hideModal(modal) {
-        modal.classList.add("hidden");
-        modal.classList.remove("flex");
-      }
-
-      function openFishForm(item) {
-        $("#fish-form").reset();
-        $("#fish-id").value = item ? item.id : "";
-        $("#fish-modal-title").textContent = item ? "Edit jenis ikan" : "Tambah jenis ikan";
-        $("#fish-modal-eyebrow").textContent = item ? "Perbarui katalog" : "Koleksi baru";
-        $("#fish-name").value = item ? item.name : "";
-        $("#fish-price").value = item ? item.price : "";
-        $("#fish-stock").value = item ? item.stock : 0;
-        $("#fish-size").value = item ? item.size : "M";
-        $("#fish-grade").value = item ? item.grade : "A";
-        $("#fish-description").value = item ? item.description : "";
-        $("#fish-image").value = item ? item.image : fishPhoto;
-        showModal(fishModal);
-        $("#fish-name").focus();
-      }
-
-      $("#search-input").addEventListener("input", renderCatalog);
-      $("#category-filter").addEventListener("change", renderCatalog);
-      $("#mobile-menu-toggle").addEventListener("click", () => {
-        const isExpanded = $("#mobile-menu-toggle").getAttribute("aria-expanded") === "true";
-        $("#mobile-menu-toggle").setAttribute("aria-expanded", String(!isExpanded));
-        $("#mobile-menu-toggle").setAttribute("aria-label", isExpanded ? "Buka menu navigasi" : "Tutup menu navigasi");
-        $("#mobile-nav").classList.toggle("hidden", isExpanded);
-      });
-      document.querySelectorAll(".mobile-nav-link").forEach((link) => link.addEventListener("click", () => {
-        $("#mobile-nav").classList.add("hidden");
-        $("#mobile-menu-toggle").setAttribute("aria-expanded", "false");
-        $("#mobile-menu-toggle").setAttribute("aria-label", "Buka menu navigasi");
-      }));
-      $("#admin-entry").addEventListener("click", () => {
-        $("#admin-pin").value = "";
-        $("#login-error").classList.add("hidden");
-        showModal(loginModal);
-        $("#admin-pin").focus();
-      });
-      $("#login-form").addEventListener("submit", (event) => {
-        event.preventDefault();
-        if ($("#admin-pin").value !== "admin123") {
-          $("#login-error").classList.remove("hidden");
-          $("#admin-pin").focus();
-          return;
-        }
-        hideModal(loginModal);
-        renderDashboard();
-        adminPanel.classList.remove("hidden");
-        document.body.classList.add("overflow-hidden");
-      });
-      $("#exit-admin").addEventListener("click", () => {
-        adminPanel.classList.add("hidden");
-        document.body.classList.remove("overflow-hidden");
-      });
-      document.querySelectorAll(".modal-close").forEach((button) => button.addEventListener("click", () => {
-        hideModal(button.closest("#login-modal, #fish-modal"));
-      }));
-      [loginModal, fishModal].forEach((modal) => modal.addEventListener("click", (event) => {
-        if (event.target === modal) hideModal(modal);
-      }));
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
-          hideModal(loginModal);
-          hideModal(fishModal);
-          $("#mobile-nav").classList.add("hidden");
-          $("#mobile-menu-toggle").setAttribute("aria-expanded", "false");
-          $("#mobile-menu-toggle").setAttribute("aria-label", "Buka menu navigasi");
-        }
-      });
-      $("#add-fish").addEventListener("click", () => openFishForm(null));
-      $("#fish-form").addEventListener("submit", (event) => {
-        event.preventDefault();
-        const id = $("#fish-id").value || `fish-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
-        const existing = fish.find((item) => item.id === id);
-        const record = {
-          id,
-          name: $("#fish-name").value.trim(),
-          price: Number($("#fish-price").value),
-          stock: Number($("#fish-stock").value),
-          size: $("#fish-size").value,
-          grade: $("#fish-grade").value,
-          description: $("#fish-description").value.trim(),
-          image: $("#fish-image").value.trim(),
-          cm: existing ? existing.cm : "10–14",
-          temperament: existing ? existing.temperament : "Damai"
-        };
-        if (!isValidFish(record)) {
-          alert("Mohon periksa kembali nama, harga, stok, ukuran, dan URL gambar.");
-          return;
-        }
-        if (existing) fish = fish.map((item) => item.id === id ? record : item);
-        else fish = [record, ...fish];
-        if (saveFish()) {
-          hideModal(fishModal);
-          showToast(existing ? "Data ikan berhasil diperbarui." : "Jenis ikan baru berhasil ditambahkan.");
-        }
-      });
-
-      $("#admin-list").addEventListener("click", (event) => {
-        const button = event.target.closest("button[data-action]");
-        if (!button) return;
-        const item = fish.find((entry) => entry.id === button.dataset.id);
-        if (!item) return;
-        if (button.dataset.action === "increase" || button.dataset.action === "decrease") {
-          const change = button.dataset.action === "increase" ? 1 : -1;
-          fish = fish.map((entry) => entry.id === item.id ? { ...entry, stock: Math.max(0, entry.stock + change) } : entry);
-          if (saveFish()) showToast("Stok berhasil diperbarui.");
-        } else if (button.dataset.action === "edit") {
-          openFishForm(item);
-        } else if (button.dataset.action === "delete") {
-          if (!confirm(`Hapus ${item.name} dari katalog?`)) return;
-          fish = fish.filter((entry) => entry.id !== item.id);
-          if (saveFish()) showToast("Jenis ikan dihapus dari katalog.");
-        }
-      });
-      $("#admin-list").addEventListener("change", (event) => {
-        const input = event.target.closest("input[data-stock-id]");
-        if (!input) return;
-        const value = Number(input.value);
-        if (!Number.isInteger(value) || value < 0) {
-          alert("Stok harus berupa bilangan bulat nol atau lebih.");
-          renderDashboard();
-          return;
-        }
-        fish = fish.map((item) => item.id === input.dataset.stockId ? { ...item, stock: value } : item);
-        if (saveFish()) showToast("Stok berhasil diperbarui.");
-      });
-      $("#reset-data").addEventListener("click", () => {
-        if (!confirm("Kembalikan katalog dan stok ke 10 data awal? Semua perubahan saat ini akan dihapus.")) return;
-        fish = structuredClone(initialFish);
-        if (saveFish()) showToast("Katalog dikembalikan ke data awal.");
-      });
-      window.addEventListener("storage", (event) => {
-        if (event.key === STORAGE_KEY) {
-          fish = loadFish();
-          renderAll();
-          showToast("Katalog diperbarui dari tab lain.");
-        }
-      });
-      $("#footer-whatsapp").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Halo Blessed Discus Indonesia, saya ingin bertanya tentang koleksi Discus.")}`;
-      $("#current-year").textContent = new Date().getFullYear();
-      renderAll();
-    })();
-  </script>
-</body>
-</html>
+              <span class="absolute bottom-3 left-4 rounded-full bg-[#092333]/65 px-3 py-1 text-[10px] text-white backdrop
